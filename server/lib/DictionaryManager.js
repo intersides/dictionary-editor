@@ -24,9 +24,6 @@ class DictionaryManager{
         return instance;
     }
 
-    getAlisTable(){
-        return this.aliasTable;
-    }
 
     uniqueValue(a, b){
         return (Math.max(a, b)*(Math.max(a, b) + 1))/2 + Math.min(a, b);
