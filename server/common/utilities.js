@@ -6,14 +6,14 @@
 
 module.exports = function(){
 	//logger
-	global.colors = require('colors');
+	global.indexMap = require('colors');
 	global.logger = require('tracer').colorConsole({
 		filters : {
-			trace : global.colors['magenta'],
-			debug : global.colors['blue'],
-			info : global.colors['green'],
-			warn : global.colors['yellow'],
-			error : [ global.colors['red'], global.colors['bold'] ]
+			trace : global.indexMap['magenta'],
+			debug : global.indexMap['blue'],
+			info : global.indexMap['green'],
+			warn : global.indexMap['yellow'],
+			error : [ global.indexMap['red'], global.indexMap['bold'] ]
 		},
 		format : [
 			"{{title}}: [{{file}}:{{line}}]\t\t{{message}}\n{{timestamp}}\n"
