@@ -134,6 +134,10 @@ class Dictionary{
         return null;
     }
 
+    getRangeFromDomain(in_domainName){
+        return this.domainRangeMap[in_domainName] === "undefined" ? null : this.domainRangeMap[in_domainName];
+    }
+
 }
 
 module.exports = {

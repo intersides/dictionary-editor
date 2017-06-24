@@ -38,6 +38,15 @@ describe("ColorDictionary class", ()=>{
 
     });
 
+    it("should get range value from original original", ()=>{
+        let success = colorDictionary.addColorAlias("Original Value", "Range Value");
+        expect(success).to.be.true;
+        let rangeValue = colorDictionary.getRangeFromDomain("Original Value");
+        expect(rangeValue).to.be.equal("Range Value");
+
+    });
+
+
     it("should map a color to an alias uniquely (no duplicates) ", ()=>{
         let success = colorDictionary.addColorAlias("Midnight Blue", "Dark Blue");
         expect(success).to.be.true;
@@ -51,7 +60,6 @@ describe("ColorDictionary class", ()=>{
         expect(success).to.be.true;
     });
 
-
     it("should ensure unique values combination (no Cycles)", ()=>{
         let success = colorDictionary.addColorAlias("Stonegrey", "Dark Grey");
         expect(success).to.be.true;
@@ -64,6 +72,7 @@ describe("ColorDictionary class", ()=>{
         let success = colorDictionary.addColorAlias("Dark Grey", "Anthracite");
         expect(success).to.be.false;
     });
+
 
 
 

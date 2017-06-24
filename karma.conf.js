@@ -1,5 +1,5 @@
 module.exports = function (config) {
-    config.set({
+    config.list({
         basePath: '',
         frameworks: ['mocha', 'sinon-chai', 'browserify'],
 
