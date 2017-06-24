@@ -1,10 +1,10 @@
 /**
- * Created by marco falsitta on 23.06.17.
+ * Created by marcofalsitta on 21.01.17.
  *
  */
 "use strict";
 
-let Logger = function(){
+module.exports = function(){
 	//logger
 	global.colors = require('colors');
 	global.logger = require('tracer').colorConsole({
@@ -28,8 +28,4 @@ let Logger = function(){
 		logger:global.logger
 	};
 
-};
-
-module.exports = {
-	logger:Logger
 };
