@@ -271,9 +271,7 @@ describe("ProductList class", ()=>{
 
     });
 
-
-
-
+    
     describe("log final structure", ()=>{
         it("should log", ()=>{
             console.log("---------------smartphone products----------------");

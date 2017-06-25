@@ -9,12 +9,8 @@ let { Dictionary } = require("./Dictionary");
 
 class ColorDictionary extends Dictionary{
 
-    constructor() {
-        super();
-    }
-
-    addColor(colorList){
-        return super.addValue(colorList);
+    constructor(_id) {
+        super(_id);
     }
 
     addColorAlias(in_originalColor, in_aliasColor){
