@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 
+import { ProductsList } from './product-list.component'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Dictionary Editor';
+  private title = 'Dictionary Editor';
+
+
+
+
 }
