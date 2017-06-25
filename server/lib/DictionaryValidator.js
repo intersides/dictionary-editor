@@ -4,7 +4,7 @@
  *
  */
 
-let { Dictionary } = require("./Dictionary");
+//let { Dictionary } = require("./Dictionary");
 
 class DictionaryValidator{
 
