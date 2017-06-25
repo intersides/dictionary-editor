@@ -74,8 +74,6 @@ describe("Client class", ()=>{
             expect(smartPhoneDictionary.hasAlias("Silver")).to.be.true;
 
 
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -96,10 +94,6 @@ describe("Client class", ()=>{
             expect(result).to.be.true;
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.be.null;
 
-
-
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -122,8 +116,6 @@ describe("Client class", ()=>{
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.be.null;
             expect(colorDictionary.getRangeFromDomain("Black Coffee")).to.not.be.null;
 
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -144,8 +136,6 @@ describe("Client class", ()=>{
             expect(result).to.be.false;
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.not.be.null;
 
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -166,8 +156,6 @@ describe("Client class", ()=>{
             expect(result).to.be.false;
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.not.be.null;
 
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -200,8 +188,6 @@ describe("Client class", ()=>{
             expect(colorDictionary.domainIsPresent("Mystic Silver")).to.be.false;
 
 
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
             console.log("--------------aliasMap--------------");
             console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
@@ -220,18 +206,13 @@ describe("Client class", ()=>{
             client.addDictionary(colorDictionary);
 
             let result = client.updateRangeInDictionary("Silver", "Midnight Black", "smartphones colors");
-
-            console.log("---------------colors----------------");
-            console.log(JSON.stringify(colorDictionary._indexMap, null, '\t'), "\n");
-            console.log("--------------aliasMap--------------");
-            console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
-
-
-            expect(colorDictionary.getRangeFromDomain("Midnight Black")).to.be.null;
             expect(result).to.be.false;
 
+            //verify that there are no changes
+            expect(colorDictionary.getRangeFromDomain("Midnight Black")).to.be.equal("Black");
 
-
+            //console.log("--------------aliasMap--------------");
+            //console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
         });
 

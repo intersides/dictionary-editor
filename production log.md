@@ -22,3 +22,14 @@ Initial steps:
 Development is going to be a TDD.
 
 TDD will drive the definition of classes
+
+NOTES:
+
+- Duplicates domains/ranges cannot happen since the pure dictionary object will not allow it.
+
+- Same for duplicates Domains with different Ranges
+
+- Only one Chain anomaly per Range value is possible. Using dictionare we cannot have more than one chain because
+ it will suppose that we allow multiple domains 
+ 
+ - Cycles:...
