@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/ProductList.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> ProductList.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.43% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>32/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">53.85% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.91% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>17/17</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { "use strict";
+&nbsp;
+var _typeof = typeof Symbol === "function" &amp;&amp; typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : <span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function (obj) {</span> <span class="cstat-no" title="statement not covered" >return obj &amp;&amp; typeof Symbol === "function" &amp;&amp; obj.constructor === Symbol &amp;&amp; obj !== Symbol.prototype ? "symbol" : typeof obj; </span>};</span>
+&nbsp;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; <span class="missing-if-branch" title="else path not taken" >E</span>if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { <span class="missing-if-branch" title="else path not taken" >E</span>if (protoProps) defineProperties(Constructor.prototype, protoProps); <span class="missing-if-branch" title="if path not taken" >I</span>if (staticProps) <span class="cstat-no" title="statement not covered" >defineProperties(Constructor, staticProps); </span>return Constructor; }; }();
+&nbsp;
+function _classCallCheck(instance, Constructor) { <span class="missing-if-branch" title="if path not taken" >I</span>if (!(instance instanceof Constructor)) { <span class="cstat-no" title="statement not covered" >throw new TypeError("Cannot call a class as a function"); </span>} }
+&nbsp;
+/**
+ * Created by marcofalsitta on 24.06.17.
+ * InterSides.net
+ *
+ */
+&nbsp;
+var ProductList = function () {
+    function ProductList(type) {
+        _classCallCheck(this, ProductList);
+&nbsp;
+        this.type = type;
+        this.list = [];
+    }
+&nbsp;
+    _createClass(ProductList, [{
+        key: "getType",
+        value: function getType() {
+            return this.type;
+        }
+    }, {
+        key: "getProducts",
+        value: function getProducts() {
+            return this.list;
+        }
+    }, {
+        key: "addProduct",
+        value: function addProduct(item) {
+&nbsp;
+            //verify that we only consider item classes corresponding to ProductSet type
+            if ((typeof item === "undefined" ? <span class="branch-0 cbranch-no" title="branch not covered" >"undefined" </span>: _typeof(item)) !== "object" || item.constructor.name !== this.type) {
+                return null;
+            } else {
+                this.list.push(item);
+                return item;
+            }
+        }
+    }]);
+&nbsp;
+    return ProductList;
+}();
+&nbsp;
+module.exports = {
+    ProductList: ProductList
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlByb2R1Y3RMaXN0LmpzIl0sIm5hbWVzIjpbIlByb2R1Y3RMaXN0IiwidHlwZSIsImxpc3QiLCJpdGVtIiwiY29uc3RydWN0b3IiLCJuYW1lIiwicHVzaCIsIm1vZHVsZSIsImV4cG9ydHMiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7Ozs7OztJQU1NQSxXO0FBRUYseUJBQVlDLElBQVosRUFBaUI7QUFBQTs7QUFDYixhQUFLQSxJQUFMLEdBQVlBLElBQVo7QUFDQSxhQUFLQyxJQUFMLEdBQVksRUFBWjtBQUNIOzs7O2tDQUVRO0FBQ0wsbUJBQU8sS0FBS0QsSUFBWjtBQUNIOzs7c0NBRVk7QUFDVCxtQkFBTyxLQUFLQyxJQUFaO0FBQ0g7OzttQ0FFVUMsSSxFQUFLOztBQUVaO0FBQ0EsZ0JBQUcsUUFBT0EsSUFBUCx5Q0FBT0EsSUFBUCxPQUFnQixRQUFoQixJQUE0QkEsS0FBS0MsV0FBTCxDQUFpQkMsSUFBakIsS0FBMEIsS0FBS0osSUFBOUQsRUFBbUU7QUFDL0QsdUJBQU8sSUFBUDtBQUNILGFBRkQsTUFHSTtBQUNBLHFCQUFLQyxJQUFMLENBQVVJLElBQVYsQ0FBZUgsSUFBZjtBQUNBLHVCQUFPQSxJQUFQO0FBQ0g7QUFFSjs7Ozs7O0FBSUxJLE9BQU9DLE9BQVAsR0FBaUI7QUFDYlIsaUJBQVlBO0FBREMsQ0FBakIiLCJmaWxlIjoiUHJvZHVjdExpc3QuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgbWFyY29mYWxzaXR0YSBvbiAyNC4wNi4xNy5cbiAqIEludGVyU2lkZXMubmV0XG4gKlxuICovXG5cbmNsYXNzIFByb2R1Y3RMaXN0e1xuXG4gICAgY29uc3RydWN0b3IodHlwZSl7XG4gICAgICAgIHRoaXMudHlwZSA9IHR5cGU7XG4gICAgICAgIHRoaXMubGlzdCA9IFtdO1xuICAgIH1cblxuICAgIGdldFR5cGUoKXtcbiAgICAgICAgcmV0dXJuIHRoaXMudHlwZTtcbiAgICB9XG5cbiAgICBnZXRQcm9kdWN0cygpe1xuICAgICAgICByZXR1cm4gdGhpcy5saXN0O1xuICAgIH1cblxuICAgIGFkZFByb2R1Y3QoaXRlbSl7XG5cbiAgICAgICAgLy92ZXJpZnkgdGhhdCB3ZSBvbmx5IGNvbnNpZGVyIGl0ZW0gY2xhc3NlcyBjb3JyZXNwb25kaW5nIHRvIFByb2R1Y3RTZXQgdHlwZVxuICAgICAgICBpZih0eXBlb2YgaXRlbSAhPT0gXCJvYmplY3RcIiB8fCBpdGVtLmNvbnN0cnVjdG9yLm5hbWUgIT09IHRoaXMudHlwZSl7XG4gICAgICAgICAgICByZXR1cm4gbnVsbDtcbiAgICAgICAgfVxuICAgICAgICBlbHNle1xuICAgICAgICAgICAgdGhpcy5saXN0LnB1c2goaXRlbSk7XG4gICAgICAgICAgICByZXR1cm4gaXRlbTtcbiAgICAgICAgfVxuXG4gICAgfVxufVxuXG5cbm1vZHVsZS5leHBvcnRzID0ge1xuICAgIFByb2R1Y3RMaXN0OlByb2R1Y3RMaXN0XG59OyJdfQ==
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jun 26 2017 11:53:04 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

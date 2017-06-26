@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/Client.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">lib/</a> Client.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.41% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>66/73</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">59.38% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>19/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.23% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>52/57</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { "use strict";
+&nbsp;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; <span class="missing-if-branch" title="else path not taken" >E</span>if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { <span class="missing-if-branch" title="else path not taken" >E</span>if (protoProps) defineProperties(Constructor.prototype, protoProps); <span class="missing-if-branch" title="if path not taken" >I</span>if (staticProps) <span class="cstat-no" title="statement not covered" >defineProperties(Constructor, staticProps); </span>return Constructor; }; }();
+&nbsp;
+function _classCallCheck(instance, Constructor) { <span class="missing-if-branch" title="if path not taken" >I</span>if (!(instance instanceof Constructor)) { <span class="cstat-no" title="statement not covered" >throw new TypeError("Cannot call a class as a function"); </span>} }
+&nbsp;
+/**
+ * Created by marcofalsitta on 24.06.17.
+ * InterSides.net
+ *
+ */
+&nbsp;
+var Client = function () {
+    function Client(_name) {
+        _classCallCheck(this, Client);
+&nbsp;
+        this.name = null;
+&nbsp;
+        if (typeof _name === "string") {
+            this.name = _name.trim();
+        }
+&nbsp;
+        /** @type {Dictionary[]} */
+        this.dictionaries = [];
+    }
+&nbsp;
+    _createClass(Client, [{
+        key: "getDictionaries",
+        value: function getDictionaries() {
+            return this.dictionaries;
+        }
+&nbsp;
+        /**
+         *
+         * @param _dictionaryName
+         * @returns {Dictionary | null}
+         */
+&nbsp;
+    }, {
+        key: "getDictionary",
+        value: function getDictionary(_dictionaryName) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+&nbsp;
+            try {
+                for (var _iterator = this.dictionaries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var dictionary = _step.value;
+&nbsp;
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if (dictionary.getId() === _dictionaryName.trim()) {
+                        return dictionary;
+                    }
+                }
+            } catch (err) {
+<span class="cstat-no" title="statement not covered" >                _didIteratorError = true;</span>
+<span class="cstat-no" title="statement not covered" >                _iteratorError = err;</span>
+            } finally {
+                try {
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (!_iteratorNormalCompletion &amp;&amp; _iterator.return) {
+<span class="cstat-no" title="statement not covered" >                        _iterator.return();</span>
+                    }
+                } finally {
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (_didIteratorError) {
+<span class="cstat-no" title="statement not covered" >                        throw _iteratorError;</span>
+                    }
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+        }
+&nbsp;
+        /**
+         * remove range set from the domain/range dictionary
+         * @param _aliasValue
+         * @param _dictionaryName
+         * @return {boolean}
+         */
+&nbsp;
+    }, {
+        key: "removeAliasFromDictionary",
+        value: function removeAliasFromDictionary(_aliasValue, _dictionaryName) {
+            var result = false;
+            var dictionary = this.getDictionary(_dictionaryName);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (dictionary) {
+                result = dictionary.removeRange(_aliasValue);
+            }
+            return result;
+        }
+&nbsp;
+        /**
+         * call the dictionary removeDomainFromRange to clear the entry related to
+         * a specific domain value
+         * @param {string} _domainValue
+         * @param {string} _dictionaryName
+         * @return {boolean}
+         */
+&nbsp;
+    }, {
+        key: "removeDomainFromDictionary",
+        value: function removeDomainFromDictionary(_domainValue, _dictionaryName) {
+            var result = false;
+            var dictionary = this.getDictionary(_dictionaryName);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (dictionary) {
+                result = dictionary.removeDomainFromRange(_domainValue);
+            }
+            return result;
+        }
+&nbsp;
+        /**
+         *
+         * @param {string} in_originalDomainValue
+         * @param {string} in_updatedDomainValue
+         * @param {string} in_dictionaryName
+         * @return {boolean | null}
+         */
+&nbsp;
+    }, {
+        key: "updateDomainInDictionary",
+        value: function updateDomainInDictionary(in_originalDomainValue, in_updatedDomainValue, in_dictionaryName) {
+            var out_result = false;
+            var dictionary = this.getDictionary(in_dictionaryName);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (dictionary) {
+                out_result = dictionary.updateDomain(in_originalDomainValue, in_updatedDomainValue);
+            }
+            return out_result;
+        }
+    }, {
+        key: "updateRangeInDictionary",
+        value: function updateRangeInDictionary(in_originalRangeValue, in_updatedRangeValue, in_dictionaryName) {
+&nbsp;
+            var out_result = false;
+            var dictionary = this.getDictionary(in_dictionaryName);
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (dictionary) {
+                out_result = dictionary.updateRange(in_originalRangeValue, in_updatedRangeValue);
+            }
+            return out_result;
+        }
+&nbsp;
+        /**
+         *
+         * @param {Dictionary} _dictionary
+         */
+&nbsp;
+    }, {
+        key: "addDictionary",
+        value: function addDictionary(_dictionary) {
+            this.dictionaries.push(_dictionary);
+        }
+    }, {
+        key: "removeDictionary",
+        value: function removeDictionary(_dicId) {
+&nbsp;
+            var indexToRemove = null;
+            for (var i = 0; i &lt; this.dictionaries.length; i++) {
+                var dic = this.dictionaries[i];
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (dic.getId() === _dicId.trim()) {
+                    indexToRemove = i;
+                }
+            }
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (indexToRemove !== null) {
+                this.dictionaries.splice(indexToRemove, 1);
+            }
+        }
+    }]);
+&nbsp;
+    return Client;
+}();
+&nbsp;
+module.exports = {
+    Client: Client
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaWVudC5qcyJdLCJuYW1lcyI6WyJDbGllbnQiLCJfbmFtZSIsIm5hbWUiLCJ0cmltIiwiZGljdGlvbmFyaWVzIiwiX2RpY3Rpb25hcnlOYW1lIiwiZGljdGlvbmFyeSIsImdldElkIiwiX2FsaWFzVmFsdWUiLCJyZXN1bHQiLCJnZXREaWN0aW9uYXJ5IiwicmVtb3ZlUmFuZ2UiLCJfZG9tYWluVmFsdWUiLCJyZW1vdmVEb21haW5Gcm9tUmFuZ2UiLCJpbl9vcmlnaW5hbERvbWFpblZhbHVlIiwiaW5fdXBkYXRlZERvbWFpblZhbHVlIiwiaW5fZGljdGlvbmFyeU5hbWUiLCJvdXRfcmVzdWx0IiwidXBkYXRlRG9tYWluIiwiaW5fb3JpZ2luYWxSYW5nZVZhbHVlIiwiaW5fdXBkYXRlZFJhbmdlVmFsdWUiLCJ1cGRhdGVSYW5nZSIsIl9kaWN0aW9uYXJ5IiwicHVzaCIsIl9kaWNJZCIsImluZGV4VG9SZW1vdmUiLCJpIiwibGVuZ3RoIiwiZGljIiwic3BsaWNlIiwibW9kdWxlIiwiZXhwb3J0cyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7OztJQU9NQSxNO0FBQ0Ysb0JBQVlDLEtBQVosRUFBa0I7QUFBQTs7QUFFZCxhQUFLQyxJQUFMLEdBQVksSUFBWjs7QUFFQSxZQUFHLE9BQU9ELEtBQVAsS0FBaUIsUUFBcEIsRUFBNkI7QUFDekIsaUJBQUtDLElBQUwsR0FBWUQsTUFBTUUsSUFBTixFQUFaO0FBQ0g7O0FBRUQ7QUFDQSxhQUFLQyxZQUFMLEdBQW9CLEVBQXBCO0FBQ0g7Ozs7MENBRWdCO0FBQ2IsbUJBQU8sS0FBS0EsWUFBWjtBQUNIOztBQUVEOzs7Ozs7OztzQ0FLY0MsZSxFQUFnQjtBQUFBO0FBQUE7QUFBQTs7QUFBQTtBQUMxQixxQ0FBc0IsS0FBS0QsWUFBM0IsOEhBQXdDO0FBQUEsd0JBQWhDRSxVQUFnQzs7QUFDcEMsd0JBQUdBLFdBQVdDLEtBQVgsT0FBdUJGLGdCQUFnQkYsSUFBaEIsRUFBMUIsRUFBaUQ7QUFDN0MsK0JBQU9HLFVBQVA7QUFDSDtBQUNKO0FBTHlCO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBTTFCLG1CQUFPLElBQVA7QUFDSDs7QUFFRDs7Ozs7Ozs7O2tEQU0wQkUsVyxFQUFhSCxlLEVBQWdCO0FBQ25ELGdCQUFJSSxTQUFTLEtBQWI7QUFDQSxnQkFBSUgsYUFBYSxLQUFLSSxhQUFMLENBQW1CTCxlQUFuQixDQUFqQjtBQUNBLGdCQUFHQyxVQUFILEVBQWM7QUFDVkcseUJBQVNILFdBQVdLLFdBQVgsQ0FBdUJILFdBQXZCLENBQVQ7QUFDSDtBQUNELG1CQUFPQyxNQUFQO0FBQ0g7O0FBRUQ7Ozs7Ozs7Ozs7bURBTzJCRyxZLEVBQWNQLGUsRUFBZ0I7QUFDckQsZ0JBQUlJLFNBQVMsS0FBYjtBQUNBLGdCQUFJSCxhQUFhLEtBQUtJLGFBQUwsQ0FBbUJMLGVBQW5CLENBQWpCO0FBQ0EsZ0JBQUdDLFVBQUgsRUFBYztBQUNWRyx5QkFBU0gsV0FBV08scUJBQVgsQ0FBaUNELFlBQWpDLENBQVQ7QUFDSDtBQUNELG1CQUFPSCxNQUFQO0FBQ0g7O0FBRUQ7Ozs7Ozs7Ozs7aURBT3lCSyxzQixFQUF3QkMscUIsRUFBdUJDLGlCLEVBQWtCO0FBQ3RGLGdCQUFJQyxhQUFhLEtBQWpCO0FBQ0EsZ0JBQUlYLGFBQWEsS0FBS0ksYUFBTCxDQUFtQk0saUJBQW5CLENBQWpCO0FBQ0EsZ0JBQUdWLFVBQUgsRUFBYztBQUNWVyw2QkFBYVgsV0FBV1ksWUFBWCxDQUF3Qkosc0JBQXhCLEVBQWdEQyxxQkFBaEQsQ0FBYjtBQUNIO0FBQ0QsbUJBQU9FLFVBQVA7QUFDSDs7O2dEQUV1QkUscUIsRUFBdUJDLG9CLEVBQXNCSixpQixFQUFrQjs7QUFFbkYsZ0JBQUlDLGFBQWEsS0FBakI7QUFDQSxnQkFBSVgsYUFBYSxLQUFLSSxhQUFMLENBQW1CTSxpQkFBbkIsQ0FBakI7QUFDQSxnQkFBR1YsVUFBSCxFQUFjO0FBQ1ZXLDZCQUFhWCxXQUFXZSxXQUFYLENBQXVCRixxQkFBdkIsRUFBOENDLG9CQUE5QyxDQUFiO0FBQ0g7QUFDRCxtQkFBT0gsVUFBUDtBQUNIOztBQUVEOzs7Ozs7O3NDQUljSyxXLEVBQVk7QUFDdEIsaUJBQUtsQixZQUFMLENBQWtCbUIsSUFBbEIsQ0FBdUJELFdBQXZCO0FBQ0g7Ozt5Q0FFZ0JFLE0sRUFBTzs7QUFFcEIsZ0JBQUlDLGdCQUFnQixJQUFwQjtBQUNBLGlCQUFJLElBQUlDLElBQUksQ0FBWixFQUFlQSxJQUFJLEtBQUt0QixZQUFMLENBQWtCdUIsTUFBckMsRUFBNkNELEdBQTdDLEVBQWlEO0FBQzdDLG9CQUFJRSxNQUFNLEtBQUt4QixZQUFMLENBQWtCc0IsQ0FBbEIsQ0FBVjtBQUNBLG9CQUFHRSxJQUFJckIsS0FBSixPQUFnQmlCLE9BQU9yQixJQUFQLEVBQW5CLEVBQWlDO0FBQzdCc0Isb0NBQWdCQyxDQUFoQjtBQUNIO0FBQ0o7O0FBRUQsZ0JBQUdELGtCQUFrQixJQUFyQixFQUEwQjtBQUN0QixxQkFBS3JCLFlBQUwsQ0FBa0J5QixNQUFsQixDQUF5QkosYUFBekIsRUFBd0MsQ0FBeEM7QUFDSDtBQUVKOzs7Ozs7QUFHTEssT0FBT0MsT0FBUCxHQUFpQjtBQUNiL0IsWUFBT0E7QUFETSxDQUFqQiIsImZpbGUiOiJDbGllbnQuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgbWFyY29mYWxzaXR0YSBvbiAyNC4wNi4xNy5cbiAqIEludGVyU2lkZXMubmV0XG4gKlxuICovXG5cblxuY2xhc3MgQ2xpZW50e1xuICAgIGNvbnN0cnVjdG9yKF9uYW1lKXtcblxuICAgICAgICB0aGlzLm5hbWUgPSBudWxsO1xuXG4gICAgICAgIGlmKHR5cGVvZiBfbmFtZSA9PT0gXCJzdHJpbmdcIil7XG4gICAgICAgICAgICB0aGlzLm5hbWUgPSBfbmFtZS50cmltKCk7XG4gICAgICAgIH1cblxuICAgICAgICAvKiogQHR5cGUge0RpY3Rpb25hcnlbXX0gKi9cbiAgICAgICAgdGhpcy5kaWN0aW9uYXJpZXMgPSBbXTtcbiAgICB9XG5cbiAgICBnZXREaWN0aW9uYXJpZXMoKXtcbiAgICAgICAgcmV0dXJuIHRoaXMuZGljdGlvbmFyaWVzO1xuICAgIH1cblxuICAgIC8qKlxuICAgICAqXG4gICAgICogQHBhcmFtIF9kaWN0aW9uYXJ5TmFtZVxuICAgICAqIEByZXR1cm5zIHtEaWN0aW9uYXJ5IHwgbnVsbH1cbiAgICAgKi9cbiAgICBnZXREaWN0aW9uYXJ5KF9kaWN0aW9uYXJ5TmFtZSl7XG4gICAgICAgIGZvcihsZXQgZGljdGlvbmFyeSBvZiB0aGlzLmRpY3Rpb25hcmllcyl7XG4gICAgICAgICAgICBpZihkaWN0aW9uYXJ5LmdldElkKCkgPT09IF9kaWN0aW9uYXJ5TmFtZS50cmltKCkpe1xuICAgICAgICAgICAgICAgIHJldHVybiBkaWN0aW9uYXJ5O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICAgIHJldHVybiBudWxsO1xuICAgIH1cblxuICAgIC8qKlxuICAgICAqIHJlbW92ZSByYW5nZSBzZXQgZnJvbSB0aGUgZG9tYWluL3JhbmdlIGRpY3Rpb25hcnlcbiAgICAgKiBAcGFyYW0gX2FsaWFzVmFsdWVcbiAgICAgKiBAcGFyYW0gX2RpY3Rpb25hcnlOYW1lXG4gICAgICogQHJldHVybiB7Ym9vbGVhbn1cbiAgICAgKi9cbiAgICByZW1vdmVBbGlhc0Zyb21EaWN0aW9uYXJ5KF9hbGlhc1ZhbHVlLCBfZGljdGlvbmFyeU5hbWUpe1xuICAgICAgICBsZXQgcmVzdWx0ID0gZmFsc2U7XG4gICAgICAgIGxldCBkaWN0aW9uYXJ5ID0gdGhpcy5nZXREaWN0aW9uYXJ5KF9kaWN0aW9uYXJ5TmFtZSk7XG4gICAgICAgIGlmKGRpY3Rpb25hcnkpe1xuICAgICAgICAgICAgcmVzdWx0ID0gZGljdGlvbmFyeS5yZW1vdmVSYW5nZShfYWxpYXNWYWx1ZSk7XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuIHJlc3VsdDtcbiAgICB9XG5cbiAgICAvKipcbiAgICAgKiBjYWxsIHRoZSBkaWN0aW9uYXJ5IHJlbW92ZURvbWFpbkZyb21SYW5nZSB0byBjbGVhciB0aGUgZW50cnkgcmVsYXRlZCB0b1xuICAgICAqIGEgc3BlY2lmaWMgZG9tYWluIHZhbHVlXG4gICAgICogQHBhcmFtIHtzdHJpbmd9IF9kb21haW5WYWx1ZVxuICAgICAqIEBwYXJhbSB7c3RyaW5nfSBfZGljdGlvbmFyeU5hbWVcbiAgICAgKiBAcmV0dXJuIHtib29sZWFufVxuICAgICAqL1xuICAgIHJlbW92ZURvbWFpbkZyb21EaWN0aW9uYXJ5KF9kb21haW5WYWx1ZSwgX2RpY3Rpb25hcnlOYW1lKXtcbiAgICAgICAgbGV0IHJlc3VsdCA9IGZhbHNlO1xuICAgICAgICBsZXQgZGljdGlvbmFyeSA9IHRoaXMuZ2V0RGljdGlvbmFyeShfZGljdGlvbmFyeU5hbWUpO1xuICAgICAgICBpZihkaWN0aW9uYXJ5KXtcbiAgICAgICAgICAgIHJlc3VsdCA9IGRpY3Rpb25hcnkucmVtb3ZlRG9tYWluRnJvbVJhbmdlKF9kb21haW5WYWx1ZSk7XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuIHJlc3VsdDtcbiAgICB9XG5cbiAgICAvKipcbiAgICAgKlxuICAgICAqIEBwYXJhbSB7c3RyaW5nfSBpbl9vcmlnaW5hbERvbWFpblZhbHVlXG4gICAgICogQHBhcmFtIHtzdHJpbmd9IGluX3VwZGF0ZWREb21haW5WYWx1ZVxuICAgICAqIEBwYXJhbSB7c3RyaW5nfSBpbl9kaWN0aW9uYXJ5TmFtZVxuICAgICAqIEByZXR1cm4ge2Jvb2xlYW4gfCBudWxsfVxuICAgICAqL1xuICAgIHVwZGF0ZURvbWFpbkluRGljdGlvbmFyeShpbl9vcmlnaW5hbERvbWFpblZhbHVlLCBpbl91cGRhdGVkRG9tYWluVmFsdWUsIGluX2RpY3Rpb25hcnlOYW1lKXtcbiAgICAgICAgbGV0IG91dF9yZXN1bHQgPSBmYWxzZTtcbiAgICAgICAgbGV0IGRpY3Rpb25hcnkgPSB0aGlzLmdldERpY3Rpb25hcnkoaW5fZGljdGlvbmFyeU5hbWUpO1xuICAgICAgICBpZihkaWN0aW9uYXJ5KXtcbiAgICAgICAgICAgIG91dF9yZXN1bHQgPSBkaWN0aW9uYXJ5LnVwZGF0ZURvbWFpbihpbl9vcmlnaW5hbERvbWFpblZhbHVlLCBpbl91cGRhdGVkRG9tYWluVmFsdWUpO1xuICAgICAgICB9XG4gICAgICAgIHJldHVybiBvdXRfcmVzdWx0O1xuICAgIH1cblxuICAgIHVwZGF0ZVJhbmdlSW5EaWN0aW9uYXJ5KGluX29yaWdpbmFsUmFuZ2VWYWx1ZSwgaW5fdXBkYXRlZFJhbmdlVmFsdWUsIGluX2RpY3Rpb25hcnlOYW1lKXtcblxuICAgICAgICBsZXQgb3V0X3Jlc3VsdCA9IGZhbHNlO1xuICAgICAgICBsZXQgZGljdGlvbmFyeSA9IHRoaXMuZ2V0RGljdGlvbmFyeShpbl9kaWN0aW9uYXJ5TmFtZSk7XG4gICAgICAgIGlmKGRpY3Rpb25hcnkpe1xuICAgICAgICAgICAgb3V0X3Jlc3VsdCA9IGRpY3Rpb25hcnkudXBkYXRlUmFuZ2UoaW5fb3JpZ2luYWxSYW5nZVZhbHVlLCBpbl91cGRhdGVkUmFuZ2VWYWx1ZSk7XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuIG91dF9yZXN1bHQ7XG4gICAgfVxuXG4gICAgLyoqXG4gICAgICpcbiAgICAgKiBAcGFyYW0ge0RpY3Rpb25hcnl9IF9kaWN0aW9uYXJ5XG4gICAgICovXG4gICAgYWRkRGljdGlvbmFyeShfZGljdGlvbmFyeSl7XG4gICAgICAgIHRoaXMuZGljdGlvbmFyaWVzLnB1c2goX2RpY3Rpb25hcnkpO1xuICAgIH1cblxuICAgIHJlbW92ZURpY3Rpb25hcnkoX2RpY0lkKXtcblxuICAgICAgICBsZXQgaW5kZXhUb1JlbW92ZSA9IG51bGw7XG4gICAgICAgIGZvcihsZXQgaSA9IDA7IGkgPCB0aGlzLmRpY3Rpb25hcmllcy5sZW5ndGg7IGkrKyl7XG4gICAgICAgICAgICBsZXQgZGljID0gdGhpcy5kaWN0aW9uYXJpZXNbaV07XG4gICAgICAgICAgICBpZihkaWMuZ2V0SWQoKSA9PT0gX2RpY0lkLnRyaW0oKSl7XG4gICAgICAgICAgICAgICAgaW5kZXhUb1JlbW92ZSA9IGk7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cblxuICAgICAgICBpZihpbmRleFRvUmVtb3ZlICE9PSBudWxsKXtcbiAgICAgICAgICAgIHRoaXMuZGljdGlvbmFyaWVzLnNwbGljZShpbmRleFRvUmVtb3ZlLCAxKTtcbiAgICAgICAgfVxuXG4gICAgfVxufVxuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgICBDbGllbnQ6Q2xpZW50XG59OyJdfQ==
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jun 26 2017 11:53:04 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
