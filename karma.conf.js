@@ -1,5 +1,5 @@
 module.exports = function (config) {
-    config.list({
+    config.set({
         basePath: '',
         frameworks: ['mocha', 'sinon-chai', 'browserify'],
 
@@ -70,13 +70,14 @@ module.exports = function (config) {
         ],
 
         port: 9878,
-        _indexMap: true,
+        colors: true,
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
 
         autowatch: true,
+        //autowatch: false,
 
         //browsers: ['PhantomJS'],
         browsers: ['Chrome'],
