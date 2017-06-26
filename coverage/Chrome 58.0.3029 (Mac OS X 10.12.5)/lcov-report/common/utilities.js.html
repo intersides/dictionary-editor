@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">35.71% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/6</span>
+        <span class='fraction'>5/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">35.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/6</span>
+        <span class='fraction'>5/14</span>
       </div>
     </div>
   </div>
@@ -77,7 +77,18 @@
 32
 33
 34
-35</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -85,8 +96,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,32 +112,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () { /**
- * Created by marco falsitta on 23.06.17.
+ * Created by marcofalsitta on 21.01.17.
  *
  */
 "use strict";
 &nbsp;
-var Logger = <span class="fstat-no" title="function not covered" >function Logger() {</span>
+module.exports = function () {
 	//logger
-<span class="cstat-no" title="statement not covered" >	global.colors = require('colors');</span>
-<span class="cstat-no" title="statement not covered" >	global.logger = require('tracer').colorConsole({</span>
+	global._indexMap = require('colors');
+	global.logger = require('tracer').colorConsole({
 		filters: {
-			trace: global.colors['magenta'],
-			debug: global.colors['blue'],
-			info: global.colors['green'],
-			warn: global.colors['yellow'],
-			error: [global.colors['red'], global.colors['bold']]
+			trace: global._indexMap['magenta'],
+			debug: global._indexMap['blue'],
+			info: global._indexMap['green'],
+			warn: global._indexMap['yellow'],
+			error: [global._indexMap['red'], global._indexMap['bold']]
 		},
 		format: ["{{title}}: [{{file}}:{{line}}]\t\t{{message}}\n{{timestamp}}\n"],
 		dateformat: "HH:MM ss.l",
@@ -135,15 +157,26 @@ var Logger = <span class="fstat-no" title="function not covered" >function Logge
 		}
 	});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	return {</span>
-		logger: global.logger
+	var generateUUID = <span class="fstat-no" title="function not covered" >function generateUUID() {</span>
+		// return "00000000-0000-0000-0000-000000000000";
+		// http://www.ietf.org/rfc/rfc4122.txt
+<span class="cstat-no" title="statement not covered" >		var s = [];</span>
+<span class="cstat-no" title="statement not covered" >		var hexDigits = "0123456789abcdef";</span>
+<span class="cstat-no" title="statement not covered" >		for (var i = 0; i &lt; 36; i++) {</span>
+<span class="cstat-no" title="statement not covered" >			s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);</span>
+		}
+<span class="cstat-no" title="statement not covered" >		s[14] = "4"; </span>// bits 12-15 of the time_hi_and_version field to 0010
+<span class="cstat-no" title="statement not covered" >		s[19] = hexDigits.substr(s[19] &amp; 0x3 | 0x8, 1); </span>// bits 6-7 of the clock_seq_hi_and_reserved to 01
+<span class="cstat-no" title="statement not covered" >		s[8] = s[13] = s[18] = s[23] = "-";</span>
+<span class="cstat-no" title="statement not covered" >		return s.join("");</span>
+	};
+&nbsp;
+	return {
+		logger: global.logger,
+		generateUUID: generateUUID
 	};
 };
-&nbsp;
-module.exports = {
-	logger: Logger
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInV0aWxpdGllcy5qcyJdLCJuYW1lcyI6WyJMb2dnZXIiLCJnbG9iYWwiLCJjb2xvcnMiLCJyZXF1aXJlIiwibG9nZ2VyIiwiY29sb3JDb25zb2xlIiwiZmlsdGVycyIsInRyYWNlIiwiZGVidWciLCJpbmZvIiwid2FybiIsImVycm9yIiwiZm9ybWF0IiwiZGF0ZWZvcm1hdCIsInByZXByb2Nlc3MiLCJkYXRhIiwidGl0bGUiLCJ0b1VwcGVyQ2FzZSIsIm1vZHVsZSIsImV4cG9ydHMiXSwibWFwcGluZ3MiOiJBQUFBOzs7O0FBSUE7O0FBRUEsSUFBSUEsU0FBUyxTQUFUQSxNQUFTLEdBQVU7QUFDdEI7QUFDQUMsUUFBT0MsTUFBUCxHQUFnQkMsUUFBUSxRQUFSLENBQWhCO0FBQ0FGLFFBQU9HLE1BQVAsR0FBZ0JELFFBQVEsUUFBUixFQUFrQkUsWUFBbEIsQ0FBK0I7QUFDOUNDLFdBQVU7QUFDVEMsVUFBUU4sT0FBT0MsTUFBUCxDQUFjLFNBQWQsQ0FEQztBQUVUTSxVQUFRUCxPQUFPQyxNQUFQLENBQWMsTUFBZCxDQUZDO0FBR1RPLFNBQU9SLE9BQU9DLE1BQVAsQ0FBYyxPQUFkLENBSEU7QUFJVFEsU0FBT1QsT0FBT0MsTUFBUCxDQUFjLFFBQWQsQ0FKRTtBQUtUUyxVQUFRLENBQUVWLE9BQU9DLE1BQVAsQ0FBYyxLQUFkLENBQUYsRUFBd0JELE9BQU9DLE1BQVAsQ0FBYyxNQUFkLENBQXhCO0FBTEMsR0FEb0M7QUFROUNVLFVBQVMsQ0FDUixnRUFEUSxDQVJxQztBQVc5Q0MsY0FBYSxZQVhpQztBQVk5Q0MsY0FBYyxvQkFBU0MsSUFBVCxFQUFjO0FBQzNCQSxRQUFLQyxLQUFMLEdBQWFELEtBQUtDLEtBQUwsQ0FBV0MsV0FBWCxFQUFiO0FBQ0E7QUFkNkMsRUFBL0IsQ0FBaEI7O0FBaUJBLFFBQU87QUFDTmIsVUFBT0gsT0FBT0c7QUFEUixFQUFQO0FBSUEsQ0F4QkQ7O0FBMEJBYyxPQUFPQyxPQUFQLEdBQWlCO0FBQ2hCZixTQUFPSjtBQURTLENBQWpCIiwiZmlsZSI6InV0aWxpdGllcy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQ3JlYXRlZCBieSBtYXJjbyBmYWxzaXR0YSBvbiAyMy4wNi4xNy5cbiAqXG4gKi9cblwidXNlIHN0cmljdFwiO1xuXG5sZXQgTG9nZ2VyID0gZnVuY3Rpb24oKXtcblx0Ly9sb2dnZXJcblx0Z2xvYmFsLmNvbG9ycyA9IHJlcXVpcmUoJ2NvbG9ycycpO1xuXHRnbG9iYWwubG9nZ2VyID0gcmVxdWlyZSgndHJhY2VyJykuY29sb3JDb25zb2xlKHtcblx0XHRmaWx0ZXJzIDoge1xuXHRcdFx0dHJhY2UgOiBnbG9iYWwuY29sb3JzWydtYWdlbnRhJ10sXG5cdFx0XHRkZWJ1ZyA6IGdsb2JhbC5jb2xvcnNbJ2JsdWUnXSxcblx0XHRcdGluZm8gOiBnbG9iYWwuY29sb3JzWydncmVlbiddLFxuXHRcdFx0d2FybiA6IGdsb2JhbC5jb2xvcnNbJ3llbGxvdyddLFxuXHRcdFx0ZXJyb3IgOiBbIGdsb2JhbC5jb2xvcnNbJ3JlZCddLCBnbG9iYWwuY29sb3JzWydib2xkJ10gXVxuXHRcdH0sXG5cdFx0Zm9ybWF0IDogW1xuXHRcdFx0XCJ7e3RpdGxlfX06IFt7e2ZpbGV9fTp7e2xpbmV9fV1cXHRcXHR7e21lc3NhZ2V9fVxcbnt7dGltZXN0YW1wfX1cXG5cIlxuXHRcdF0sXG5cdFx0ZGF0ZWZvcm1hdCA6IFwiSEg6TU0gc3MubFwiLFxuXHRcdHByZXByb2Nlc3MgOiAgZnVuY3Rpb24oZGF0YSl7XG5cdFx0XHRkYXRhLnRpdGxlID0gZGF0YS50aXRsZS50b1VwcGVyQ2FzZSgpO1xuXHRcdH1cblx0fSk7XG5cblx0cmV0dXJuIHtcblx0XHRsb2dnZXI6Z2xvYmFsLmxvZ2dlclxuXHR9O1xuXG59O1xuXG5tb2R1bGUuZXhwb3J0cyA9IHtcblx0bG9nZ2VyOkxvZ2dlclxufTsiXX0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInV0aWxpdGllcy5qcyJdLCJuYW1lcyI6WyJtb2R1bGUiLCJleHBvcnRzIiwiZ2xvYmFsIiwiX2luZGV4TWFwIiwicmVxdWlyZSIsImxvZ2dlciIsImNvbG9yQ29uc29sZSIsImZpbHRlcnMiLCJ0cmFjZSIsImRlYnVnIiwiaW5mbyIsIndhcm4iLCJlcnJvciIsImZvcm1hdCIsImRhdGVmb3JtYXQiLCJwcmVwcm9jZXNzIiwiZGF0YSIsInRpdGxlIiwidG9VcHBlckNhc2UiLCJnZW5lcmF0ZVVVSUQiLCJzIiwiaGV4RGlnaXRzIiwiaSIsInN1YnN0ciIsIk1hdGgiLCJmbG9vciIsInJhbmRvbSIsImpvaW4iXSwibWFwcGluZ3MiOiJBQUFBOzs7O0FBSUE7O0FBRUFBLE9BQU9DLE9BQVAsR0FBaUIsWUFBVTtBQUMxQjtBQUNBQyxRQUFPQyxTQUFQLEdBQW1CQyxRQUFRLFFBQVIsQ0FBbkI7QUFDQUYsUUFBT0csTUFBUCxHQUFnQkQsUUFBUSxRQUFSLEVBQWtCRSxZQUFsQixDQUErQjtBQUM5Q0MsV0FBVTtBQUNUQyxVQUFRTixPQUFPQyxTQUFQLENBQWlCLFNBQWpCLENBREM7QUFFVE0sVUFBUVAsT0FBT0MsU0FBUCxDQUFpQixNQUFqQixDQUZDO0FBR1RPLFNBQU9SLE9BQU9DLFNBQVAsQ0FBaUIsT0FBakIsQ0FIRTtBQUlUUSxTQUFPVCxPQUFPQyxTQUFQLENBQWlCLFFBQWpCLENBSkU7QUFLVFMsVUFBUSxDQUFFVixPQUFPQyxTQUFQLENBQWlCLEtBQWpCLENBQUYsRUFBMkJELE9BQU9DLFNBQVAsQ0FBaUIsTUFBakIsQ0FBM0I7QUFMQyxHQURvQztBQVE5Q1UsVUFBUyxDQUNSLGdFQURRLENBUnFDO0FBVzlDQyxjQUFhLFlBWGlDO0FBWTlDQyxjQUFjLG9CQUFTQyxJQUFULEVBQWM7QUFDM0JBLFFBQUtDLEtBQUwsR0FBYUQsS0FBS0MsS0FBTCxDQUFXQyxXQUFYLEVBQWI7QUFDQTtBQWQ2QyxFQUEvQixDQUFoQjs7QUFpQkcsS0FBSUMsZUFBZSxTQUFmQSxZQUFlLEdBQVU7QUFDekI7QUFDQTtBQUNBLE1BQUlDLElBQUksRUFBUjtBQUNBLE1BQUlDLFlBQVksa0JBQWhCO0FBQ0EsT0FBSyxJQUFJQyxJQUFJLENBQWIsRUFBZ0JBLElBQUksRUFBcEIsRUFBd0JBLEdBQXhCLEVBQTZCO0FBQ3pCRixLQUFFRSxDQUFGLElBQU9ELFVBQVVFLE1BQVYsQ0FBaUJDLEtBQUtDLEtBQUwsQ0FBV0QsS0FBS0UsTUFBTCxLQUFnQixJQUEzQixDQUFqQixFQUFtRCxDQUFuRCxDQUFQO0FBQ0g7QUFDRE4sSUFBRSxFQUFGLElBQVEsR0FBUixDQVJ5QixDQVFYO0FBQ2RBLElBQUUsRUFBRixJQUFRQyxVQUFVRSxNQUFWLENBQWlCSCxFQUFFLEVBQUYsSUFBUSxHQUFSLEdBQWMsR0FBL0IsRUFBb0MsQ0FBcEMsQ0FBUixDQVR5QixDQVN3QjtBQUNqREEsSUFBRSxDQUFGLElBQU9BLEVBQUUsRUFBRixJQUFRQSxFQUFFLEVBQUYsSUFBUUEsRUFBRSxFQUFGLElBQVEsR0FBL0I7QUFDQSxTQUFPQSxFQUFFTyxJQUFGLENBQU8sRUFBUCxDQUFQO0FBQ0gsRUFaRDs7QUFlQSxRQUFPO0FBQ1R0QixVQUFPSCxPQUFPRyxNQURMO0FBRUhjLGdCQUFhQTtBQUZWLEVBQVA7QUFLSCxDQXhDRCIsImZpbGUiOiJ1dGlsaXRpZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgbWFyY29mYWxzaXR0YSBvbiAyMS4wMS4xNy5cbiAqXG4gKi9cblwidXNlIHN0cmljdFwiO1xuXG5tb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uKCl7XG5cdC8vbG9nZ2VyXG5cdGdsb2JhbC5faW5kZXhNYXAgPSByZXF1aXJlKCdjb2xvcnMnKTtcblx0Z2xvYmFsLmxvZ2dlciA9IHJlcXVpcmUoJ3RyYWNlcicpLmNvbG9yQ29uc29sZSh7XG5cdFx0ZmlsdGVycyA6IHtcblx0XHRcdHRyYWNlIDogZ2xvYmFsLl9pbmRleE1hcFsnbWFnZW50YSddLFxuXHRcdFx0ZGVidWcgOiBnbG9iYWwuX2luZGV4TWFwWydibHVlJ10sXG5cdFx0XHRpbmZvIDogZ2xvYmFsLl9pbmRleE1hcFsnZ3JlZW4nXSxcblx0XHRcdHdhcm4gOiBnbG9iYWwuX2luZGV4TWFwWyd5ZWxsb3cnXSxcblx0XHRcdGVycm9yIDogWyBnbG9iYWwuX2luZGV4TWFwWydyZWQnXSwgZ2xvYmFsLl9pbmRleE1hcFsnYm9sZCddIF1cblx0XHR9LFxuXHRcdGZvcm1hdCA6IFtcblx0XHRcdFwie3t0aXRsZX19OiBbe3tmaWxlfX06e3tsaW5lfX1dXFx0XFx0e3ttZXNzYWdlfX1cXG57e3RpbWVzdGFtcH19XFxuXCJcblx0XHRdLFxuXHRcdGRhdGVmb3JtYXQgOiBcIkhIOk1NIHNzLmxcIixcblx0XHRwcmVwcm9jZXNzIDogIGZ1bmN0aW9uKGRhdGEpe1xuXHRcdFx0ZGF0YS50aXRsZSA9IGRhdGEudGl0bGUudG9VcHBlckNhc2UoKTtcblx0XHR9XG5cdH0pO1xuXG4gICAgbGV0IGdlbmVyYXRlVVVJRCA9IGZ1bmN0aW9uKCl7XG4gICAgICAgIC8vIHJldHVybiBcIjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMFwiO1xuICAgICAgICAvLyBodHRwOi8vd3d3LmlldGYub3JnL3JmYy9yZmM0MTIyLnR4dFxuICAgICAgICBsZXQgcyA9IFtdO1xuICAgICAgICBsZXQgaGV4RGlnaXRzID0gXCIwMTIzNDU2Nzg5YWJjZGVmXCI7XG4gICAgICAgIGZvciAobGV0IGkgPSAwOyBpIDwgMzY7IGkrKykge1xuICAgICAgICAgICAgc1tpXSA9IGhleERpZ2l0cy5zdWJzdHIoTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpICogMHgxMCksIDEpO1xuICAgICAgICB9XG4gICAgICAgIHNbMTRdID0gXCI0XCI7ICAvLyBiaXRzIDEyLTE1IG9mIHRoZSB0aW1lX2hpX2FuZF92ZXJzaW9uIGZpZWxkIHRvIDAwMTBcbiAgICAgICAgc1sxOV0gPSBoZXhEaWdpdHMuc3Vic3RyKHNbMTldICYgMHgzIHwgMHg4LCAxKTsgIC8vIGJpdHMgNi03IG9mIHRoZSBjbG9ja19zZXFfaGlfYW5kX3Jlc2VydmVkIHRvIDAxXG4gICAgICAgIHNbOF0gPSBzWzEzXSA9IHNbMThdID0gc1syM10gPSBcIi1cIjtcbiAgICAgICAgcmV0dXJuIHMuam9pbihcIlwiKTtcbiAgICB9O1xuXG5cbiAgICByZXR1cm4ge1xuXHRcdGxvZ2dlcjpnbG9iYWwubG9nZ2VyLFxuICAgICAgICBnZW5lcmF0ZVVVSUQ6Z2VuZXJhdGVVVUlEXG5cdH07XG5cbn07Il19
 }());
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -151,7 +184,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 23 2017 20:37:37 GMT+0200 (CEST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jun 26 2017 11:53:04 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../prettify.js"></script>
