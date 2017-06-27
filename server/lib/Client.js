@@ -118,30 +118,7 @@ class Client{
 		}
 	}
 
-	addDomainRangeToDictionary(_domain, _range, _dictionaryName){
-        let dictionary = this.getDictionary(_dictionaryName);
-		if(dictionary){
-			return dictionary.addToDomainRange(_domain, _range);
-		}
-		return false;
 
-    }
-
-    /**
-     * call the dictionary removeDomainFromRange to clear the entry related to
-     * a specific domain value
-     * @param {string} _domainValue
-     * @param {string} _dictionaryName
-     * @return {boolean}
-     */
-    removeDomainFromDictionary(_domainValue, _dictionaryName){
-        let result = false;
-        let dictionary = this.getDictionary(_dictionaryName);
-        if(dictionary){
-            result = dictionary.removeDomainFromRange(_domainValue);
-        }
-        return result;
-    }
 
     /**
      *
@@ -160,7 +137,6 @@ class Client{
     }
 
     updateRangeInDictionary(in_originalRangeValue, in_updatedRangeValue, in_dictionaryName){
-
         let out_result = false;
         let dictionary = this.getDictionary(in_dictionaryName);
         if(dictionary){

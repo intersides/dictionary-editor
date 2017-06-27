@@ -6,13 +6,8 @@
 
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {inject} from 'aurelia-framework';
-
-let {ColorDictionary} = require('./ColorDictionary');
-let {DictionaryValidator} = require('./DictionaryValidator');
-
 import {ColorAliasEntry} from './color-alias-entry';
 import {RestApi} from "./rest-api";
-
 
 
 @inject(EventAggregator, RestApi)

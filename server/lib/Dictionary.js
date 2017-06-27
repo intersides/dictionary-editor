@@ -182,47 +182,65 @@ class Dictionary{
 
     /**
      * Add a new entry in the domain/range using the existing range value,  removes the previous one.
-     * _rebuildIndexMap2 is not called because _addToDomainRange() calls it already
      * Should fails if the updated value already exists
      * @param in_originalVale
      * @param in_newValue
      * @return {*}
      */
     updateDomain(in_originalVale, in_newValue){
+
         if(this._domainRangeMap[in_originalVale] !== "undefined"){
-            let rangeValue = this._domainRangeMap[in_originalVale];
-            if(this._addToDomainRange(in_newValue, rangeValue)){
-                delete this._domainRangeMap[in_originalVale];
-                return true;
+
+	        let rangeValue = this._domainRangeMap[in_originalVale];
+
+	        let willIvalidate = DictionaryValidator.willInvalidateDictionary(in_newValue, rangeValue, this);
+            if(willIvalidate === false){
+
+            	delete this._domainRangeMap[in_originalVale];
+
+            	let result = this.addEntry({domain:in_newValue, range:rangeValue});
+            	if(result instanceof DictionaryError === false){
+            		return true;
+	            }
             }
+            return false;
+
+        }
+        else{
+			console.log("does not exists")
         }
         return false;
+
     }
 
 
     /**
-     *
+     * Change all ranges from old_vale to new_value as long as it will not create a chain. (new value already present in domain)
      * @param in_originalVale
      * @param in_newValue
      * @return {boolean}
      */
     updateRange(in_originalVale, in_newValue){
 
-        let willInvalidate = DictionaryValidator.willInvalidateDictionary(null, in_newValue, this);
-        if(willInvalidate === true){
+	    if(this.getDomains().indexOf(in_newValue) !== -1){
+	    	//there are domains with this intended value. exit operaiton
             return false;
-        }
+	    }
+	    else{
 
-        let updatedRows = 0;
-        this.getDomains().forEach((domain)=>{
-            if(this._domainRangeMap[domain] === in_originalVale){
-                //console.info("**found ", domain, in_originalVale);
-                this._domainRangeMap[domain] = in_newValue;
-                updatedRows++;
-            }
-        });
+		    let updatedRows = 0;
+		    this.getDomains().forEach((domain)=>{
+			    if(this._domainRangeMap[domain] === in_originalVale){
+				    //console.info("**found ", domain, in_originalVale);
+				    this._domainRangeMap[domain] = in_newValue;
+				    updatedRows++;
+			    }
+		    });
 
-        return updatedRows > 0;
+		    return updatedRows > 0;
+	    }
+
+
     }
 
 
@@ -248,6 +266,7 @@ class Dictionary{
 	 * @param in_domainValue
 	 * @param in_rangeValue
 	 * @return {*}
+	 * @private
 	 */
 	_addToDomainRange(in_domainValue, in_rangeValue){
 

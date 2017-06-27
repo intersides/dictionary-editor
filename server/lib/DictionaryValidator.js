@@ -104,7 +104,6 @@ class DictionaryValidator{
 	 * @return {boolean | ValidationError}
 	 */
 	static findEntry(in_entry, in_dictionary){
-
     	let entryToMatch = in_entry;
     	let entries = in_dictionary.getEntries();
 
@@ -113,7 +112,6 @@ class DictionaryValidator{
     		if(entries.hasOwnProperty(domain)){
 
 			    let range = entries[domain];
-
 			    if(domain.toLowerCase() === entryToMatch.domain.toLowerCase()
 				    &&
 				    range.toLowerCase() === entryToMatch.range.toLowerCase()){
@@ -121,6 +119,8 @@ class DictionaryValidator{
 			    }
 		    }
 	    }
+
+	    //console.error(foundItems);
 
 	    if(foundItems === 0){
     		return false;
@@ -209,17 +209,21 @@ class DictionaryValidator{
     //TODO: consider to only run validate for Chains... if cycles might imply that we have chains
     static willInvalidateDictionary(_domain, _range, _dictionary){
 
-        //convert to lower case.
-        //1 - Duplicate Domains/Ranges
-        //2 - Duplicate Domains Different Ranges
-        //3 - Cycles, cross referencing.. two or more
-        //4 - Chains, Value in range also appear in Domain column
+        //return  this.willChain(_domain, _range, _dictionary);
 
-
-
-
-        return !!(this.willChain(_domain, _range, _dictionary) || this.willCycle(_domain, _range, _dictionary));
+	    return this.willDuplicate(_domain, _range, _dictionary)
+		    || this.willChain(_domain, _range, _dictionary)
+		    || this.willCycle(_domain, _range, _dictionary);
     }
+
+
+    static willDuplicate(_domain, _range, _dictionary){
+
+	    return this.findEntry({domain:_domain, range:_range}, _dictionary);
+
+    }
+
+
 
     static willCycle(_domain, _range, _dictionary){
 
@@ -236,7 +240,8 @@ class DictionaryValidator{
     };
 
     /**
-     * If the passed domain is part or ranges or if the intended range is part of domain, it will fail.
+     Chains: A chain structure in the dictionary (a value in Range column also appears in Domain column
+     of another entry), resulting in inconsistent transformation.
      * @param _domain
      * @param _range
      * @param _dictionary
@@ -245,15 +250,19 @@ class DictionaryValidator{
     static willChain(_domain, _range, _dictionary){
 
     	let domainPartOfRanges = false;
-    	let rangePartOfDomains = false;
 
-    	let domains = _dictionary.getDomains();
-    	for(let domain of domains){
-    		if(domain.toLowerCase() === _range.toLowerCase()){
-			    rangePartOfDomains = true;
-			    break;
-		    }
-	    }
+    	//let rangePartOfDomains = false;
+
+    	//let domains = _dictionary.getDomains();
+    	//for(let domain of domains){
+		 //   console.log(domain, _range);
+    	//	if(domain.toLowerCase() === _range.toLowerCase()){
+			//    console.error(domain, _range);
+	    //
+			//    rangePartOfDomains = true;
+			//    break;
+		 //   }
+	    //}
 
 	    let ranges = _dictionary.getRanges();
 	    for(let range of ranges){
@@ -263,8 +272,8 @@ class DictionaryValidator{
 		    }
 	    }
 
-        //console.log("*", _range, _dictionary.getRanges().indexOf(_domain) !== -1);
-        return domainPartOfRanges || rangePartOfDomains;
+        //return domainPartOfRanges || rangePartOfDomains;
+        return domainPartOfRanges;
     };
 
     static removeCycles(dictionary){
