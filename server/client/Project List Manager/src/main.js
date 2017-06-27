@@ -9,10 +9,6 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature('resources');
-    //.feature('app');
-    //.feature('contact-list')
-    //.feature('contact-detail')
-    //.feature('no-selection');
 
   if (environment.debug) {
     aurelia.use.developmentLogging();

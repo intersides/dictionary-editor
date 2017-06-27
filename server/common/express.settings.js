@@ -11,6 +11,7 @@ module.exports = function(){
 	let expressServer = express();
 
 	expressServer.use(express.static('./client/Project List Manager'));
+	//expressServer.use(express.static('./lib'));
 	expressServer.use(express.static('public'));
 	expressServer.use(bodyParser.json()); // for parsing application/json
 	expressServer.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

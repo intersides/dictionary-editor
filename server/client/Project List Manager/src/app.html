@@ -2,20 +2,34 @@
   <require from="bootstrap/css/bootstrap.css"></require>
   <require from="./styles.css"></require>
   <require from="./contact-list"></require>
+  <require from="./product-list"></require>
+  <require from="./color-transformation-list"></require>
 
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        <i class="fa fa-user"></i>
-        <span>Contacts</span>
+        <i class="fa fa-user"></i><span>${title}</span>
       </a>
     </div>
+
   </nav>
 
   <div class="container">
+
     <div class="row">
-      <contact-list class="col-md-4"></contact-list>
-      <router-view class="col-md-8"></router-view>
+
+      <product-list class="col-md-6"></product-list>
+
+      <color-transformation-list class="col-md-6">?</color-transformation-list>
+
+
+      <!--<router-view class="col-md-6"></router-view>-->
+
     </div>
+
   </div>
+
+  <!--<contact-list class="col-md-4"></contact-list>-->
+
 </template>

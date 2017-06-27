@@ -1,3 +1,4 @@
+
 let latency = 200;
 let id = 0;
 
@@ -45,7 +46,9 @@ let contacts = [
 
 export class WebAPI {
   isRequesting = false;
-  
+
+  constructor(){}
+
   getContactList(){
     this.isRequesting = true;
     return new Promise(resolve => {

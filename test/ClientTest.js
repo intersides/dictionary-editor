@@ -51,6 +51,29 @@ describe("Client class", ()=>{
 
         });
 
+        it("should add an entry to the dictionary", ()=>{
+
+	        let colorDictionary = new ColorDictionary("smartphones colors");
+	        colorDictionary.addColorAlias("Stonegrey", "Dark Grey");
+	        colorDictionary.addColorAlias("Midnight Black", "Black");
+	        colorDictionary.addColorAlias("Strong Coffee", "Black");
+	        colorDictionary.addColorAlias("Mystic Silver", "Silver");
+
+	        let client = new Client();
+	        client.addDictionary(colorDictionary);
+
+	        let result = client.addDomainRangeToDictionary("Billy", "Kid", "smartphones colors");
+	        expect(result).to.be.true;
+
+	        let result2 = client.addDomainRangeToDictionary("Billy", "Kid", "smartphones colors");
+	        expect(result2).to.be.false;
+
+	        let result3 = client.addDomainRangeToDictionary("billy", "kid", "smartphones colors");
+	        expect(result3).to.be.false;
+
+
+        });
+
         it("should remove range entry from dictionary", ()=>{
 
             let colorDictionary = new ColorDictionary("smartphones colors");
@@ -215,6 +238,8 @@ describe("Client class", ()=>{
             //console.log(JSON.stringify(colorDictionary._domainRangeMap, null, '\t'), "\n");
 
         });
+
+
 
     });
 

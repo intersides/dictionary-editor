@@ -20,9 +20,11 @@ export class ContactDetail {
 
     return this.api.getContactDetails(params.id).then(contact => {
       this.contact = contact;
-      this.routeConfig.navModel.setTitle(contact.firstName);
-      this.originalContact = JSON.parse(JSON.stringify(contact));
+      //this.routeConfig.navModel.setTitle(contact.firstName);
+      //this.originalContact = JSON.parse(JSON.stringify(contact));
+
       this.ea.publish("ContactViewed", {testValue: 'What was viewed?'});
+
     });
   }
 
@@ -35,9 +37,11 @@ export class ContactDetail {
 
     this.api.saveContact(this.contact).then(contact => {
       this.contact = contact;
-      this.routeConfig.navModel.setTitle(contact.firstName);
+      //this.routeConfig.navModel.setTitle(contact.firstName);
       this.originalContact = JSON.parse(JSON.stringify(contact));
+
       this.ea.publish("ContactSaved", {testValue: 'What was saved?'});
+
     });
 
 

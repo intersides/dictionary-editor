@@ -51,6 +51,15 @@ class Client{
         return result;
     }
 
+	addDomainRangeToDictionary(_domain, _range, _dictionaryName){
+        let dictionary = this.getDictionary(_dictionaryName);
+		if(dictionary){
+			return dictionary.addToDomainRange(_domain, _range);
+		}
+		return false;
+
+    }
+
     /**
      * call the dictionary removeDomainFromRange to clear the entry related to
      * a specific domain value

@@ -1,0 +1,36 @@
+<template>
+  <!--<require from="./color-alias-entry"></require>-->
+
+  <div class="color-transformation-list">
+    <h3>Color Aliases</h3>
+
+    <form submit.trigger="addAlias()">
+      <input type="text" value.bind="selectedDomain">
+      <input type="text" value.bind="intendedRangeValue">
+      <button type="submit">Add alias</button>
+    </form>
+
+
+    <ul class="list-group">
+
+      <li class="list-group-item ${alias.valid === true ? 'valid' : 'invalid'}" repeat.for="alias of aliases">
+          <span class="domain">${alias.domain}</span>
+          <h4 class="range">${alias.range}</h4>
+          <button click.delegate="removeAlias(alias)">X</button>
+
+          <!--<compose  class="list-group-item" repeat.for="alias of aliases"-->
+            <!--view-model="color-alias-entry"-->
+            <!--view.bind="color-alias-entry.html"-->
+            <!--model.bind="alias"-->
+          <!--&gt;</compose>-->
+
+          <!--<li as-element="color-alias-entry" with.bind="alias" repeat.for="alias of aliases"></li>-->
+
+
+      </li>
+
+    </ul>
+    <button click.delegate="validate()">validate</button>
+  </div>
+
+</template>

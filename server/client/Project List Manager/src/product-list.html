@@ -1,0 +1,26 @@
+<template>
+
+  <div class="products-list">
+    <h3>Products list</h3>
+    <ul class="list-group">
+
+      <li class="list-group-item" repeat.for="product of products">
+
+        <div class="productEntry">
+          <div class="actions">
+            <button click.delegate="editColor(product.color)"> set color alias</button>
+          </div>
+          <!--<h3>${product.brand}</h3>-->
+          <h3>${product.name} ${product.version}</h3>
+          <h4>${product.color}</h4>
+          <!--<h4>${product.productionYear}</h4>-->
+          <!--<h4>${product.price}</h4>-->
+          <!--<caption>${product.description}</caption>-->
+        </div>
+
+      </li>
+
+    </ul>
+  </div>
+
+</template>
