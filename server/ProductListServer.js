@@ -14,6 +14,7 @@ let Server = require('./common/_Server');
 let logger = require('./common/utilities')().logger;
 let request = require('request');
 let {Client} = require('./lib/Client');
+let {ClientError} = require('./lib/ClientError');
 let {ColorDictionary} = require('./lib/ColorDictionary');
 
 let fs = require('fs');
@@ -102,34 +103,37 @@ let huaweiPSpecs = {
 };
 
 
-let colorTransformationList = {
-	"Red Apple":"Red",
-	"Blue Noa":"Blu",
-	"Venom":"Black",
-	"Black Widow":"Black",
-	"Stonegrey":"Dark Grey",
-	"Midnight Black": "Black",
-	"Mystic Silver":"Silver",
-	"Strong Coffee":"Silver",
-	"Mild Coffee":"Brown"
-};
-
-
 class ProductListServer extends Server{
 
 	constructor(expressServer, mysqlDb){
 		super(expressServer, mysqlDb);
 
-		let colorDictionary =  new ColorDictionary("smartphones colors");
-		colorDictionary.addColorAlias("Stonegrey", "Dark Grey");
-		colorDictionary.addColorAlias("Midnight Black", "Black");
-		colorDictionary.addColorAlias("Mystic Silver", "Silver");
-
 		this.client = new Client('ABC');
-		this.client.addDictionary(colorDictionary);
+		this.client.addDictionary(new ColorDictionary("smartphones"));
+
+		this.storedDataLocation = './storage/FNAC_coloraliases_smartphones.json';
+
+		this.loadDataSotrage(this.storedDataLocation, (err, data)=>{
+			if(err){
+				console.error("Critical error, could not load dictionary data %s:",this.storedDataLocation,  err);
+			}
+			else{
+				try{
+					let jsonData = JSON.parse(data);
+					this.client.getDictionary("smartphones").setFromJSON(jsonData);
+				}
+				catch(parseExc){
+					console.error("Critical error, could not parse loaded dictionary data from %s", this.storedDataLocation);
+				}
+			}
+		});
 
 
 		this.addRoutes();
+	}
+
+	loadDataSotrage(_pathToData, _callback){
+		fs.readFile(_pathToData, {encoding: 'utf8'}, _callback);
 	}
 
 
@@ -161,11 +165,69 @@ class ProductListServer extends Server{
 			res.status(200).json({colorAliases:this.getColorAliases()});
 		});
 
-		this.rest.post('/addDomainRanege', (req, res)=>{
-			logger.log(req.body);
-			//this.client.addColo
+		this.rest.post('/addDomainRange', (req, res)=>{
+			let entry = req.body;
+			logger.log("entry", entry);
 
-			res.status(200).json({colorAliases:this.getColorAliases()});
+
+			let entryResult = this.client.addEntryToDictionary(entry.value, entry['type']);
+
+			let currentEntries = this.client.getDictionary(entry['type']).getEntries();
+
+			if( (entryResult instanceof ClientError) === false){
+				logger.info(entryResult);
+				//save
+				fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
+					if(err){
+						logger.error("Could not save data ", err);
+
+					}
+					else{
+						logger.log("data stored!");
+					}
+				});
+			}
+			else{
+				logger.error(entryResult);
+			}
+
+			res.status(200).json({colorAliases:currentEntries, result:entryResult});
+
+
+		});
+
+		this.rest.post('/removeDomainRange', (req, res)=>{
+			let entry = req.body;
+			logger.log("entry", entry);
+
+
+			let deleteResult = this.client.removeEntryFromDictionary(entry.value, entry['type']);
+
+			let currentEntries = this.client.getDictionary(entry['type']).getEntries();
+
+			if( (deleteResult instanceof ClientError) === false){
+				logger.info(deleteResult);
+				if(deleteResult === true){
+					//save
+					fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
+						if(err){
+							logger.error("Could not save data ", err);
+
+						}
+						else{
+							logger.log("data stored!");
+						}
+					});
+				}
+
+			}
+			else{
+				logger.error(deleteResult);
+			}
+
+			res.status(200).json({colorAliases:currentEntries, result:deleteResult});
+
+
 		});
 
 	}
@@ -181,7 +243,7 @@ class ProductListServer extends Server{
 	}
 
 	getColorAliases(){
-		return colorTransformationList;
+		return this.client.getDictionary("smartphones").getEntries();
 	}
 
 

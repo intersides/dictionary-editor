@@ -30,14 +30,15 @@ export class RestApi {
 
   }
 
-
-  sendDomainRange(data){
+  addDomainRange(data){
     jQuery.ajax({
-      url:"addDomainRanege",
+      url:"addDomainRange",
       method:"POST",
       data:data,
       success:(response)=>{
-        this.ea.publish("ProductsReceived", response);
+        console.log(response);
+
+        this.ea.publish("onColorAliasesReceived", response);
       },
       error:(error)=>{
         console.error(error);
@@ -45,6 +46,24 @@ export class RestApi {
 
     });
   }
+
+  removeDomainRange(data){
+    jQuery.ajax({
+      url:"removeDomainRange",
+      method:"POST",
+      data:data,
+      success:(response)=>{
+        console.log(response);
+
+        this.ea.publish("onColorAliasesReceived", response);
+      },
+      error:(error)=>{
+        console.error(error);
+      }
+
+    });
+  }
+
 
 
   getColorAliases(){

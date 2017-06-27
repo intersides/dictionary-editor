@@ -5,6 +5,7 @@
  */
 
 let { Dictionary } = require("./Dictionary");
+let {ValidationError} = require('./ValidationError');
 
 class DictionaryValidator{
 
@@ -96,6 +97,46 @@ class DictionaryValidator{
 
     }
 
+	/**
+	 * find EXACT match case insensitive. including range, not just domain
+	 * @param in_entry
+	 * @param in_dictionary
+	 * @return {boolean | ValidationError}
+	 */
+	static findEntry(in_entry, in_dictionary){
+
+    	let entryToMatch = in_entry;
+    	let entries = in_dictionary.getEntries();
+
+    	let foundItems = 0;
+    	for(let domain in entries){
+    		if(entries.hasOwnProperty(domain)){
+
+			    let range = entries[domain];
+
+			    if(domain.toLowerCase() === entryToMatch.domain.toLowerCase()
+				    &&
+				    range.toLowerCase() === entryToMatch.range.toLowerCase()){
+			    	foundItems += 1;
+			    }
+		    }
+	    }
+
+	    if(foundItems === 0){
+    		return false;
+	    }
+	    else if(foundItems === 1){
+	    	return true;
+	    }
+	    else{
+			return new ValidationError({
+				message:"More than one entry has been found in the dictionary.",
+				details:"Invalid dictionary state. More than one entry has same textual values. It might be caused by items being inserted with lower case and others with upper case"
+			});
+	    }
+
+	}
+
     static searchForCycles(in_combinedId, _entries, indexMap){
 
         for(let domain in _entries){
@@ -155,8 +196,28 @@ class DictionaryValidator{
         };
     }
 
+	/**
+	 *
+	 * @param _entry
+	 * @param _dictionary
+	 * @return {bool | ValidationError}
+	 */
+	static entryExists(_entry, _dictionary){
+	    return this.findEntry(_entry, _dictionary);
+    }
+
     //TODO: consider to only run validate for Chains... if cycles might imply that we have chains
     static willInvalidateDictionary(_domain, _range, _dictionary){
+
+        //convert to lower case.
+        //1 - Duplicate Domains/Ranges
+        //2 - Duplicate Domains Different Ranges
+        //3 - Cycles, cross referencing.. two or more
+        //4 - Chains, Value in range also appear in Domain column
+
+
+
+
         return !!(this.willChain(_domain, _range, _dictionary) || this.willCycle(_domain, _range, _dictionary));
     }
 
@@ -182,8 +243,28 @@ class DictionaryValidator{
      * @return {boolean}
      */
     static willChain(_domain, _range, _dictionary){
+
+    	let domainPartOfRanges = false;
+    	let rangePartOfDomains = false;
+
+    	let domains = _dictionary.getDomains();
+    	for(let domain of domains){
+    		if(domain.toLowerCase() === _range.toLowerCase()){
+			    rangePartOfDomains = true;
+			    break;
+		    }
+	    }
+
+	    let ranges = _dictionary.getRanges();
+	    for(let range of ranges){
+	    	if(range.toLowerCase() === _domain.toLowerCase()){
+			    domainPartOfRanges = true;
+			    break;
+		    }
+	    }
+
         //console.log("*", _range, _dictionary.getRanges().indexOf(_domain) !== -1);
-        return _dictionary.getDomains().indexOf(_range) !== -1 || _dictionary.getRanges().indexOf(_domain) !== -1;
+        return domainPartOfRanges || rangePartOfDomains;
     };
 
     static removeCycles(dictionary){

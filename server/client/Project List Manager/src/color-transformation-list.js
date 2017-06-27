@@ -49,6 +49,10 @@ export class ColorTransformationList{
 
 
   fillAliasesList(colorList){
+
+    //reset list
+    this.aliases = [];
+
     Object.keys(colorList).forEach((color, idx)=>{
       //this.aliases.push({domain:color, range:colorList[color]});
       let colorAliasEntry = new ColorAliasEntry(color, colorList[color]);
@@ -60,83 +64,31 @@ export class ColorTransformationList{
   }
 
   addAlias(){
-
     //send to server.
-    let data = {
-      domain:this.selectedDomain,
-      range:this.intendedRangeValue
+    let dataToSend = {
+      type: 'smartphones',
+      value: {
+        domain: this.selectedDomain,
+        range: this.intendedRangeValue
+      }
     };
-    console.warn("sending....", data);
-    this.restApi.sendDomainRange(data);
-
-    return;
-
-    let colorAliasEntry = new ColorAliasEntry(this.selectedDomain, this.intendedRangeValue);
-
-    this.aliases.push(colorAliasEntry);
-    this.selectedDomain = null;
-    this.intendedRangeValue = null;
-    this.validate();
+    this.restApi.addDomainRange(dataToSend);
   }
 
   validate(){
-
-    //let colorDictionary = new ColorDictionary();
-    //this.aliases.forEach((colorAliasEntry)=>{
-    //  colorAliasEntry.valid = true;
-    //  console.log(colorAliasEntry);
-    //  colorDictionary.addColorAlias(colorAliasEntry.domain, colorAliasEntry.range, this.ensureValidation);
-    //});
-    //
-    //let result = DictionaryValidator.findIssues(colorDictionary);
-    //console.warn(result);
-    //if(result.cycles.length){
-    //  console.log("cycles", result.cycles);
-    //}
-    //
-    //if(result.chains.length > 0){
-    //  result.chains.forEach((chain)=>{
-    //    console.log("chain", chain);
-    //    //find item
-    //    this.aliases.forEach((colorAliasEntry)=>{
-    //      console.log(colorAliasEntry);
-    //      let domain = Object.keys(chain)[0];
-    //      let range = chain[domain];
-    //
-    //      if(colorAliasEntry.domain === domain && colorAliasEntry.range === range){
-    //        colorAliasEntry.valid = false;
-    //      }
-    //    });
-    //  });
-    //
-    //}
-
-    //send to server.
-    this.restApi.sendDomainRange({
-      domain:this.selectedDomain,
-      range:this.intendedRangeValue
-    })
-
-
-
+   console.error("TODO");
   }
 
   removeAlias(_colorAliasEntry){
-
-    let itemToRemove = null;
-    this.aliases.forEach((colorAliasEntry, idx)=>{
-      if(colorAliasEntry.domain === _colorAliasEntry.domain && colorAliasEntry.range === _colorAliasEntry.range){
-        console.log("remove", idx);
-        itemToRemove = idx;
+    //send to server.
+    let dataToSend = {
+      type: 'smartphones',
+      value: {
+        domain: _colorAliasEntry.domain,
+        range: _colorAliasEntry.range
       }
-    });
-
-    if(itemToRemove){
-      this.aliases.splice(itemToRemove, 1);
-    }
-
-    this.validate();
-
+    };
+    this.restApi.removeDomainRange(dataToSend);
   }
 
 }

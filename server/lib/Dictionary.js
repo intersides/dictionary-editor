@@ -7,6 +7,9 @@
 //let logger = require('../common/utilities')().logger;
 
 let {DictionaryValidator} = require("./DictionaryValidator");
+let {ValidationError} = require('./ValidationError');
+let {DictionaryError} = require('./DictionaryError');
+let {ErrorCode} = require('./Error');
 
 class Dictionary{
 
@@ -28,6 +31,101 @@ class Dictionary{
         this._domainRangeMap = {};
 
     }
+
+	/**
+     * Take json doctionary of string:string to set the current domainRangeMap
+	 * @param _jsonDictionary
+	 */
+	setFromJSON(_jsonDictionary){
+        //TODO:validate the passed parameter
+		this._domainRangeMap = _jsonDictionary;
+    }
+
+	/**
+	 *
+	 * @param domainRangeEntry
+	 * entitySpec = {
+			domain:"Some original value",
+			range:"Alias to be applied"
+
+		};
+	 */
+	addEntry(domainRangeEntry){
+		//TODO:validate entry object
+
+		let response = DictionaryValidator.entryExists(domainRangeEntry, this);
+
+		if(response.constructor === ValidationError){
+
+			let dictionaryError = new DictionaryError({
+				message:"An invalidation error has been triggered. Check the attached error"
+			});
+			dictionaryError.stackErrors.push(response);
+			return dictionaryError;
+		}
+		else if(response === false){
+
+			//validate for cycle
+			let willCycle = DictionaryValidator.willCycle(domainRangeEntry.domain, domainRangeEntry.range, this);
+			let willChain = DictionaryValidator.willChain(domainRangeEntry.domain, domainRangeEntry.range, this);
+			if(willCycle === true){
+				return new DictionaryError({
+					code:ErrorCode.CYCLE_FAIL,
+					message:"Failed adding entry to dictionary. It is a cycle.",
+					details:"Cycles: Two or more rows in a dictionary result in cycles, resulting in a never-ending transformation."
+				});
+			}
+			else if(willChain === true){
+				return new DictionaryError({
+					code:ErrorCode.CHAIN_FAIL,
+					message:"Failed adding entry to dictionary. It is a chain.",
+					details:"Chains: A chain structure in the dictionary (a value in Range column also appears in Domain column of another entry), resulting in inconsistent transformation."
+				});
+			}
+			else{
+				//all seems to be fine
+				return this._addToDomainRange(domainRangeEntry.domain, domainRangeEntry.range);
+			}
+
+		}
+		else{
+			return new DictionaryError({
+				message:"Failed adding entry to dictionary. The key already exists.",
+				detail:'Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation',
+				code:ErrorCode.DUPLICATE_FAIL
+			});
+		}
+
+    }
+
+	/**
+	 *
+	 * @param domainRangeEntry
+	 * @return { DictionaryError | boolean }
+	 */
+	removeEntry(domainRangeEntry){
+
+	    let response = DictionaryValidator.entryExists(domainRangeEntry, this);
+	    if(response.constructor === ValidationError){
+
+		    let dictionaryError = new DictionaryError({
+			    message:"An invalidation error has been triggered. Check the attached error"
+		    });
+		    dictionaryError.stackErrors.push(response);
+		    return dictionaryError;
+	    }
+	    else if(response === true){
+		    let removealResult = this.removeDomainFromRange(domainRangeEntry['domain']);
+		    return removealResult;
+	    }
+	    else{
+		    return new DictionaryError({
+			    message:"Failed removing entry to dictionary. Item was not found."
+		    });
+	    }
+
+    }
+
 
     getEntries(){
         return this._domainRangeMap;
@@ -70,16 +168,21 @@ class Dictionary{
      */
     removeDomainFromRange(_domainName){
 
-        if(this._domainRangeMap[_domainName] !== "undefined"){
-            delete this._domainRangeMap[_domainName];
-            return true;
-        }
-        return false;
+    	//need to cycle because lowercase need to be enforced
+	    for(let domain in this._domainRangeMap){
+	    	if(this._domainRangeMap.hasOwnProperty(domain)){
+	    		if(domain.toLowerCase() === _domainName.toLowerCase()){
+				    delete this._domainRangeMap[domain];
+				    return true;
+			    }
+		    }
+	    }
+	    return false;
     };
 
     /**
      * Add a new entry in the domain/range using the existing range value,  removes the previous one.
-     * _rebuildIndexMap2 is not called because addToDomainRange() calls it already
+     * _rebuildIndexMap2 is not called because _addToDomainRange() calls it already
      * Should fails if the updated value already exists
      * @param in_originalVale
      * @param in_newValue
@@ -88,7 +191,7 @@ class Dictionary{
     updateDomain(in_originalVale, in_newValue){
         if(this._domainRangeMap[in_originalVale] !== "undefined"){
             let rangeValue = this._domainRangeMap[in_originalVale];
-            if(this.addToDomainRange(in_newValue, rangeValue)){
+            if(this._addToDomainRange(in_newValue, rangeValue)){
                 delete this._domainRangeMap[in_originalVale];
                 return true;
             }
@@ -140,23 +243,39 @@ class Dictionary{
         return wasSuccess;
     }
 
-    addToDomainRange(in_domainValue, in_rangeValue, in_validateFirst=true){
+	/**
+	 * only check if domain is found not
+	 * @param in_domainValue
+	 * @param in_rangeValue
+	 * @return {*}
+	 */
+	_addToDomainRange(in_domainValue, in_rangeValue){
 
-        if(in_validateFirst === true){
-            if(DictionaryValidator.willInvalidateDictionary(in_domainValue, in_rangeValue, this)){
-                return false;
-            }
-        }
+		//cycling because lowercase transformation need to be checked
+		for(let domain in this._domainRangeMap){
 
-        //another validation ?
-        if(typeof this._domainRangeMap[in_domainValue] === "undefined"){
-            this._domainRangeMap[in_domainValue] = in_rangeValue;
-            return true;
-        }
-        return false;
+			if(this._domainRangeMap.hasOwnProperty(domain)){
 
-    };
+				if(domain.toLowerCase() === in_domainValue.toLowerCase()){
 
+					return new DictionaryError({
+						message:"Failed adding entry to dictionary. The key already exists.",
+						details:"Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation.",
+						code:ErrorCode.DUPLICATE_FAIL
+					});
+
+				}
+			}
+		}
+
+		//ELSE .. no domain duplicate found
+		this._domainRangeMap[in_domainValue] = in_rangeValue;
+
+		let insertedEntity = {};
+		insertedEntity[in_domainValue] = in_rangeValue;
+		return insertedEntity;
+
+	}
 
     domainIsPresent(in_domainName){
         return typeof this._domainRangeMap[in_domainName] !== "undefined";

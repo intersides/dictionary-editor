@@ -4,6 +4,8 @@
  *
  */
 
+let {ClientError} = require('./ClientError');
+let {DictionaryError} = require('./DictionaryError');
 
 class Client{
     constructor(_name){
@@ -50,6 +52,71 @@ class Client{
         }
         return result;
     }
+
+	/**
+	 *
+	 * @param _entryObj
+	 * @param _dictionaryName
+	 * @return {ClientError | object }
+	 */
+	addEntryToDictionary(_entryObj, _dictionaryName){
+
+	    let dictionary = this.getDictionary(_dictionaryName);
+	    if(dictionary){
+
+            let result = dictionary.addEntry(_entryObj);
+
+            if(result instanceof DictionaryError){
+            	let clientError = new ClientError({
+					message:"Could not add entry to dictionary",
+		            details:"A detailed error has been appended."
+	            });
+	            clientError.stackErrors.push(result);
+
+	            return clientError;
+
+
+            }else{
+                return result;
+            }
+
+	    }
+	    else{
+	    	return new ClientError({
+			    message:`Client has no dictionary named ${_dictionaryName}`,
+			    details:`Method Client.addEntryToDictionary was called with a dictionary name that do not correspond to existing dictionaries`
+	    	})
+	    }
+
+    }
+
+	removeEntryFromDictionary(_entryObj, _dictionaryName){
+
+		let dictionary = this.getDictionary(_dictionaryName);
+		if(dictionary){
+
+			let result = dictionary.removeEntry(_entryObj);
+
+			if(result instanceof DictionaryError){
+				let clientError = new ClientError({
+					message:"Could not remove entry from dictionary",
+					details:"A detailed error has been appended."
+				});
+				clientError.stackErrors.push(result);
+				return clientError;
+
+			}else{
+				return result;
+			}
+
+		}
+		else{
+			return new ClientError({
+				message:`Client has no dictionary named ${_dictionaryName}`,
+				details:`Method Client.addEntryToDictionary was called with a dictionary name that do not correspond to existing dictionaries`
+			})
+		}
+	}
 
 	addDomainRangeToDictionary(_domain, _range, _dictionaryName){
         let dictionary = this.getDictionary(_dictionaryName);
@@ -107,6 +174,7 @@ class Client{
      * @param {Dictionary} _dictionary
      */
     addDictionary(_dictionary){
+        //TODO: validate parameter
         this.dictionaries.push(_dictionary);
     }
 

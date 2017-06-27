@@ -13,8 +13,8 @@ class ColorDictionary extends Dictionary{
         super(_id);
     }
 
-    addColorAlias(in_originalColor, in_aliasColor, in_validateFirst){
-        return super.addToDomainRange(in_originalColor, in_aliasColor, in_validateFirst);
+    addColorAlias(in_originalColor, in_aliasColor){
+        return super.addEntry({domain:in_originalColor, range:in_aliasColor});
     }
 
 }
