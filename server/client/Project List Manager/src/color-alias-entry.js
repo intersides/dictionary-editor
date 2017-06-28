@@ -6,16 +6,24 @@
 
 export class ColorAliasEntry{
 
-  constructor(_domain, _range){
+  constructor(_domain, _range, RestApi){
     this.domain = _domain !== "undefined" ? _domain : null;
     this.range = _range !== "undefined" ? _range : null;
+
     this.valid = true;
+    this.isChecked = false;
   }
 
-  activate(model){
-    this.domain = model.domain;
-    this.range = model.range;
-    this.valid = model.valid;
+  getDomain(){
+    return this.domain;
+  }
+  getRange(){
+    return this.range;
+  }
+
+  editMode(evt, value){
+    this.isChecked = !this.isChecked;
+    console.log("in edit mode:", this.isChecked)
   }
 
   setValid(_flag){

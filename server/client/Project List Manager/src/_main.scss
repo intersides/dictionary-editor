@@ -1,4 +1,7 @@
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+  background-color: #f6f7fb !important;
+}
 
 section {
   margin: 0 20px;
@@ -12,15 +15,28 @@ a:focus {
   margin: 12px 24px 0 6px;
 }
 
-.no-selection {
-  margin: 20px;
+.flex-row{
+  display: flex;
+  justify-content: space-around;
+  >*{
+    flex-grow: 1;
+
+  }
+  padding: 10px;
+
 }
 
-.contact-list {
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
+.vcard{
+  display: block;
+  max-width: 480px;
+  min-width: 180px;
+  background-color: white;
+
+  padding:10px;
+  margin: auto;
+  box-shadow: 0 0 4px gray;
 }
+
 
 .panel {
   margin: 20px;

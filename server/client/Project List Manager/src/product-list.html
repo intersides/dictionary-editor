@@ -10,12 +10,19 @@
           <div class="actions">
             <button click.delegate="editColor(product.color)"> set color alias</button>
           </div>
-          <!--<h3>${product.brand}</h3>-->
-          <h3>${product.name} ${product.version}</h3>
-          <h4>${product.color}</h4>
-          <!--<h4>${product.productionYear}</h4>-->
-          <!--<h4>${product.price}</h4>-->
-          <!--<caption>${product.description}</caption>-->
+
+          <div class="identifier">
+            <span class="brand">${product.brand}</span>
+            <span class="name">${product.name} ${product.version}</span>
+          </div>
+
+          <div class="color">${product.color}</div>
+          <div class="price">${product.price}</div>
+          <details>
+            <summary>Description</summary>
+            <div class="year">Model year:${product.productionYear}</div>
+            <div class="description">${product.description}</div>
+          </details>
         </div>
 
       </li>

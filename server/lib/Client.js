@@ -4,6 +4,7 @@
  *
  */
 
+let {ErrorType, ErrorCode} = require('./Error');
 let {ClientError} = require('./ClientError');
 let {DictionaryError} = require('./DictionaryError');
 
@@ -128,21 +129,41 @@ class Client{
      * @return {boolean | null}
      */
     updateDomainInDictionary(in_originalDomainValue, in_updatedDomainValue, in_dictionaryName){
-        let out_result = false;
+        let result = new ClientError({
+	        message:"Could not update domain",
+	        details:"No specified reasons."
+        });
+
         let dictionary = this.getDictionary(in_dictionaryName);
         if(dictionary){
-            out_result = dictionary.updateDomain(in_originalDomainValue, in_updatedDomainValue);
+            let duplicateResult = dictionary.updateDomain(in_originalDomainValue, in_updatedDomainValue);
+            if(duplicateResult instanceof DictionaryError){
+	            result.stackErrors.push(duplicateResult);
+            }
+            else{
+				return duplicateResult;
+            }
         }
-        return out_result;
+        else{
+	        result = new ClientError({
+		        message:"Could not update domain value because the dictionary could not be found",
+		        details:"Check attached error for more information."
+	        });
+	        result.stackErrors.push(new DictionaryError({
+		        message:"Could not update domain value because the dictionary could not be found",
+				code:ErrorCode.DICTIONARY_NOT_FOUND
+	        }));
+        }
+        return result;
     }
 
     updateRangeInDictionary(in_originalRangeValue, in_updatedRangeValue, in_dictionaryName){
-        let out_result = false;
+	    let result = false;
         let dictionary = this.getDictionary(in_dictionaryName);
         if(dictionary){
-            out_result = dictionary.updateRange(in_originalRangeValue, in_updatedRangeValue);
+	        result = dictionary.updateRange(in_originalRangeValue, in_updatedRangeValue);
         }
-        return out_result;
+        return result;
     }
 
     /**

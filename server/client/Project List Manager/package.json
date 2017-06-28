@@ -13,6 +13,7 @@
     "aurelia-fetch-client": "^1.1.2",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "jquery": "^2.2.4",
     "systemjs": "latest",
     "systemjs-plugin-text": "latest"

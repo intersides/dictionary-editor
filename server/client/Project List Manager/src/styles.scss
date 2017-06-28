@@ -2,17 +2,5 @@
 @import "product-list";
 @import "color-transformation";
 
-//debuggubg interface
-router-view{
-  display: block;
-  border:1px solid red;
-}
-
-color-transformation-list,
-product-list,
-contact-list{
-  display: block;
-  border:1px solid green;
-}
-
+//debugging interface
 

@@ -4,7 +4,6 @@
  *
  */
 
-//let logger = require('../common/utilities')().logger;
 let { Dictionary } = require("./Dictionary");
 
 class ColorDictionary extends Dictionary{

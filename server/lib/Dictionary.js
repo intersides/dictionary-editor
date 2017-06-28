@@ -200,16 +200,41 @@ class Dictionary{
 
             	let result = this.addEntry({domain:in_newValue, range:rangeValue});
             	if(result instanceof DictionaryError === false){
-            		return true;
+            		return {domain:in_newValue, range:rangeValue};
 	            }
             }
-            return false;
+            else{
+
+	            let error = new DictionaryError({
+		            message:"Could not update domain value because the dictionary will be invalid",
+	            });
+
+            	if(DictionaryValidator.willDuplicate(in_newValue, rangeValue, this)){
+					error.code = ErrorCode.DUPLICATE_FAIL;
+	            }
+	            else if(DictionaryValidator.willChain(in_newValue, rangeValue, this)){
+		            error.code = ErrorCode.CHAIN_FAIL;
+	            }
+	            else if(DictionaryValidator.willCycle(in_newValue, rangeValue, this)){
+		            error.code = ErrorCode.CYCLE_FAIL;
+	            }
+
+	            return error;
+
+            }
 
         }
         else{
-			console.log("does not exists")
+	        return new DictionaryError({
+		        message:"Could not update domain value because the domain to modified was not found"
+	        });
+
         }
-        return false;
+
+	    return new DictionaryError({
+		    message:"Could not update domain value because the dictionary could not be found",
+		    code:ErrorCode.DICTIONARY_NOT_FOUND
+	    });
 
     }
 
@@ -224,20 +249,23 @@ class Dictionary{
 
 	    if(this.getDomains().indexOf(in_newValue) !== -1){
 	    	//there are domains with this intended value. exit operaiton
-            return false;
+            return new DictionaryError({
+	            message:"Cannot update range. The value already exists as domain.",
+	            code:ErrorCode.CHAIN_FAIL
+            });
 	    }
 	    else{
 
-		    let updatedRows = 0;
+		    let updatedRows = [];
 		    this.getDomains().forEach((domain)=>{
 			    if(this._domainRangeMap[domain] === in_originalVale){
 				    //console.info("**found ", domain, in_originalVale);
 				    this._domainRangeMap[domain] = in_newValue;
-				    updatedRows++;
+				    updatedRows.push({domain:domain, range:in_newValue});
 			    }
 		    });
 
-		    return updatedRows > 0;
+		    return updatedRows;
 	    }
 
 

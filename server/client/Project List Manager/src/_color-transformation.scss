@@ -26,9 +26,88 @@ color-transformation-list{
 
   }
 
+  li{
+
+    &:hover{
+      background-color: #e0eef7;
+      >input{
+        background-color: inherit;
+      }
+    }
+
+    .edit-entry,
+    .remove-entry{
+      outline: none;
+      border: none;
+      background: none;
+
+      i.fa{
+        display: inline-block;
+        padding: 5px;
+        font-size: 1.5em;
+      }
+    }
+
+    .edit-entry{
+      i.fa{
+        color: #888892;
+        &:hover{
+          color: blue;
+        }
+
+      }
+    }
+
+    .remove-entry{
+      i.fa{
+        color: #90331a;
+      }
+    }
+
+    //hover the trash icon.
+    .remove-entry i{
+      &:hover{
+        color: #b0121d;
+        &:before {
+          content:"\f1f8";
+        }
+      }
+    }
+
+    >input[type="text"]{
+      border: 1px solid transparent;
+      margin: 2px;
+      padding: 5px;
+      line-height: 2.3em;
+      border-radius: 3px;
+
+      &.range{
+        font-weight: 800;
+      }
+
+      &:read-only{
+        color: #595959;
+      }
 
 
+    }
+  }
 
+  li.editable{
 
+    >input[type="text"]{
+      border: 1px dotted lightgray;
+      background-color:  lightyellow;
+      //border-bottom:1px solid #ffd577;
+      box-shadow: inset 0 0 2px #2196F3;
+    }
+
+    .edit-entry{
+      i.fa{
+        color: #2e57bb;
+      }
+    }
+  }
 
 }
+

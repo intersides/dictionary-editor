@@ -7,13 +7,19 @@ import copyFiles from './copy-files';
 import watch from './watch';
 import project from '../aurelia.json';
 
+// Added task
+import prepareFontAwesome from './prepare-font-awesome';
+
+
 let build = gulp.series(
   readProjectConfiguration,
   gulp.parallel(
     transpile,
     processMarkup,
     processCSS,
-    copyFiles
+    copyFiles,
+    // Added task
+    prepareFontAwesome
   ),
   writeBundles
 );

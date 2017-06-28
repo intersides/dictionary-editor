@@ -65,6 +65,24 @@ export class RestApi {
   }
 
 
+  editDomainRange(data) {
+    jQuery.ajax({
+      url:"editDomainRange",
+      method:"POST",
+      data:data,
+      success:(response)=>{
+        console.log(response);
+
+        this.ea.publish("onColorAliasesReceived", response);
+      },
+      error:(error)=>{
+        console.error(error);
+      }
+
+    });
+};
+
+
 
   getColorAliases(){
 

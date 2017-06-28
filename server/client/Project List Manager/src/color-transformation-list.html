@@ -1,8 +1,8 @@
 <template>
-  <!--<require from="./color-alias-entry"></require>-->
 
   <div class="color-transformation-list">
     <h3>Color Aliases</h3>
+    <div class="applicaiton-messages">this will replace error warning</div>
 
     <form submit.trigger="addAlias()">
       <input type="text" value.bind="selectedDomain">
@@ -13,24 +13,18 @@
 
     <ul class="list-group">
 
-      <li class="list-group-item ${alias.valid === true ? 'valid' : 'invalid'}" repeat.for="alias of aliases">
-          <span class="domain">${alias.domain}</span>
-          <h4 class="range">${alias.range}</h4>
-          <button click.delegate="removeAlias(alias)">X</button>
+      <li class="list-group-item ${alias.valid === true ? 'valid' : 'invalid'} ${alias.isChecked === true ? 'editable' : ''}" repeat.for="alias of aliases">
 
-          <!--<compose  class="list-group-item" repeat.for="alias of aliases"-->
-            <!--view-model="color-alias-entry"-->
-            <!--view.bind="color-alias-entry.html"-->
-            <!--model.bind="alias"-->
-          <!--&gt;</compose>-->
+        <input class="domain" type="text" data-beforechange="${alias.getDomain()}" value.bind="alias.domain" readonly.bind="!alias.isChecked" change.delegate="hasChanged(alias, 'domain', $event)">
+        <input class="range" type="text" data-beforechange="${alias.getRange()}" value.bind="alias.range" readonly.bind="!alias.isChecked" change.delegate="hasChanged(alias, 'range', $event)">
 
-          <!--<li as-element="color-alias-entry" with.bind="alias" repeat.for="alias of aliases"></li>-->
-
+        <button class="remove-entry" click.delegate="removeAlias(alias)"><i class="fa fa-trash-o"></i></button>
+        <button class="edit-entry" click.delegate="alias.editMode($event)"><i class="fa fa-edit"></i></button>
 
       </li>
 
     </ul>
-    <button click.delegate="validate()">validate</button>
+    <!--<button click.delegate="validate()">validate</button>-->
   </div>
 
 </template>

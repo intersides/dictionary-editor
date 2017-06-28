@@ -170,9 +170,9 @@ class ProductListServer extends Server{
 			logger.log("entry", entry);
 
 
-			let entryResult = this.client.addEntryToDictionary(entry.value, entry['type']);
+			let entryResult = this.client.addEntryToDictionary(entry.value, entry['list']);
 
-			let currentEntries = this.client.getDictionary(entry['type']).getEntries();
+			let currentEntries = this.client.getDictionary(entry['list']).getEntries();
 
 			if( (entryResult instanceof ClientError) === false){
 				logger.info(entryResult);
@@ -201,9 +201,9 @@ class ProductListServer extends Server{
 			logger.log("entry", entry);
 
 
-			let deleteResult = this.client.removeEntryFromDictionary(entry.value, entry['type']);
+			let deleteResult = this.client.removeEntryFromDictionary(entry.value, entry['list']);
 
-			let currentEntries = this.client.getDictionary(entry['type']).getEntries();
+			let currentEntries = this.client.getDictionary(entry['list']).getEntries();
 
 			if( (deleteResult instanceof ClientError) === false){
 				logger.info(deleteResult);
@@ -226,6 +226,49 @@ class ProductListServer extends Server{
 			}
 
 			res.status(200).json({colorAliases:currentEntries, result:deleteResult});
+
+
+		});
+
+		this.rest.post('/editDomainRange', (req, res)=>{
+			let requestData = req.body;
+			logger.log("entry", requestData);
+
+			let propertyType = requestData['type'];
+
+			let updateResult = null;
+			if(propertyType === "range"){
+				updateResult = this.client.updateRangeInDictionary(requestData['value']['old'], requestData['value']['new'], requestData['list']);
+			}
+			else if(propertyType === "domain"){
+				updateResult = this.client.updateDomainInDictionary(requestData['value']['old'], requestData['value']['new'], requestData['list']);
+			}
+			else{
+				console.error("unexpected type... ", propertyType);
+			}
+
+			let currentEntries = this.client.getDictionary(requestData['list']).getEntries();
+
+			//TODO:ensure that we only receive ClientError or object. Not a DictionaryError
+			if( (updateResult instanceof ClientError ) === false ){
+				logger.info(updateResult);
+				//save
+				fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
+					if(err){
+						logger.error("Could not save data ", err);
+
+					}
+					else{
+						logger.log("data stored!");
+					}
+				});
+
+			}
+			else{
+				logger.error(updateResult);
+			}
+
+			res.status(200).json({colorAliases:currentEntries, result:updateResult});
 
 
 		});

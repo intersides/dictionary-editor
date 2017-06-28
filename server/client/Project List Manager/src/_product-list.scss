@@ -2,4 +2,31 @@
   button{
     font-size: small;
   }
+
+  >*{
+    padding:5px;
+  }
+
+  .identifier{
+    >span{
+      display: inline-block;
+      margin-right: 14px;
+    }
+  }
+  .brand{
+    font-size:14px;
+  }
+  .name{
+    font-size:16px;
+    font-weight: bold;
+  }
+  .color{
+    font-weight: bold;
+  }
+  .price{
+    font-size: small;
+  }
+
+  details{}
 }
+

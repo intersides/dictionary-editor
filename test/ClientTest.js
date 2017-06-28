@@ -318,7 +318,7 @@ describe("Client class", ()=>{
 
         it("should update original value (domain) entry from dictionary", ()=>{
 
-            let colorDictionary = new ColorDictionary("smartphones colors");
+            let colorDictionary = new ColorDictionary("smartphones");
             colorDictionary.addColorAlias("Stonegrey", "Dark Grey");
             colorDictionary.addColorAlias("Midnight Black", "Black");
             colorDictionary.addColorAlias("Strong Coffee", "Black");
@@ -327,8 +327,8 @@ describe("Client class", ()=>{
             let client = new Client();
             client.addDictionary(colorDictionary);
 
-            let result = client.updateDomainInDictionary("Strong Coffee", "Black Coffee", "smartphones colors");
-            expect(result).to.be.true;
+            let result = client.updateDomainInDictionary("Strong Coffee", "Black Coffee", "smartphones");
+            expect(result).to.be.deep.equal({domain:"Black Coffee", range:"Black"});
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.be.null;
             expect(colorDictionary.getRangeFromDomain("Black Coffee")).to.not.be.null;
 
@@ -349,7 +349,7 @@ describe("Client class", ()=>{
             client.addDictionary(colorDictionary);
 
             let result = client.updateDomainInDictionary("Strong Coffee", "Midnight Black", "smartphones");
-            expect(result).to.be.false;
+            expect(result).to.be.instanceOf(ClientError);
 
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.not.be.null;
 
@@ -358,7 +358,7 @@ describe("Client class", ()=>{
 
         });
 
-        it("should not update original value (domain) entry from dictionary if the updated new values is a range value", ()=>{
+        it("should not update original value (domain) entry from dictionary if the updated new values generate a chain", ()=>{
 
             let colorDictionary = new ColorDictionary("smartphones colors");
             colorDictionary.addColorAlias("Stonegrey", "Dark Grey");
@@ -370,7 +370,10 @@ describe("Client class", ()=>{
             client.addDictionary(colorDictionary);
 
             let result = client.updateDomainInDictionary("Strong Coffee", "Black", "smartphones colors");
-            expect(result).to.be.false;
+	        expect(result).to.instanceOf(ClientError);
+	        let attachedError = result.stackErrors[0];
+	        expect(attachedError).to.have.property("code", ErrorCode.CHAIN_FAIL);
+
             expect(colorDictionary.getRangeFromDomain("Strong Coffee")).to.not.be.null;
 
             console.log("--------------aliasMap--------------");
@@ -390,18 +393,32 @@ describe("Client class", ()=>{
             client.addDictionary(colorDictionary);
 
             let result = client.updateRangeInDictionary("Black", "Nero", "smartphones colors");
-	        expect(result).to.be.true;
+	        expect(result).to.be.instanceOf(Array);
+	        expect(result[0]).to.be.deep.equal({
+		        "domain": "Midnight Black",
+		        "range": "Nero"
+	        });
+	        expect(result[1]).to.be.deep.equal({
+		        "domain": "Strong Coffee",
+		        "range": "Nero"
+	        });
 
             expect(colorDictionary.getRangeFromDomain("Midnight Black")).to.not.be.null;
             expect(colorDictionary.getRangeFromDomain("Midnight Black")).to.be.equal("Nero");
 
             //update Silver range -> Nero
             result = client.updateRangeInDictionary("Silver", "Nero", "smartphones colors");
-            expect(result).to.be.true;
+            expect(result).to.be.instanceOf(Array);
+            expect(result[0]).to.be.deep.equal({
+	            "domain": "Mystic Silver",
+	            "range": "Nero"
+            });
+
 
             //update Mystic Silver domain -> Mystic Dark
             result = client.updateDomainInDictionary("Mystic Silver", "Mystic Dark", "smartphones colors");
-            expect(result).to.be.true;
+            expect(result).to.be.deep.equal({ domain: 'Mystic Dark', range: 'Nero' });
+
             expect(colorDictionary.domainIsPresent("Mystic Dark")).to.be.true;
             expect(colorDictionary.domainIsPresent("Mystic Silver")).to.be.false;
 
@@ -424,7 +441,8 @@ describe("Client class", ()=>{
             client.addDictionary(colorDictionary);
 
             let result = client.updateRangeInDictionary("Silver", "Midnight Black", "smartphones colors");
-            expect(result).to.be.false;
+            expect(result).to.be.instanceOf(DictionaryError);
+            expect(result).to.have.property("code", ErrorCode.CHAIN_FAIL);
 
             //verify that there are no changes
             expect(colorDictionary.getRangeFromDomain("Midnight Black")).to.be.equal("Black");
