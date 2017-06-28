@@ -12,12 +12,15 @@ let gConfig = require('../config');
 
 let expressSettings = require('./common/express.settings')();
 let ProductListServer = require('./ProductListServer');
-let mysqlDb = require('mysql').createConnection({
-    host     : gConfig.MySQLServer.host,
-    user     : gConfig.MySQLServer.user,
-    password : gConfig.MySQLServer.password
-    //database : commonConfig.db.database
-});
+
+//NOTE: no need for mysql support for this server.
+//let mysqlDb = require('mysql').createConnection({
+//    host     : gConfig.MySQLServer.host,
+//    user     : gConfig.MySQLServer.user,
+//    password : gConfig.MySQLServer.password
+//    //database : commonConfig.db.database
+//});
+let mysqlDb = null;
 
 
 let server = new ProductListServer(expressSettings, mysqlDb);
