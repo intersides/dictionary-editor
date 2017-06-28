@@ -10,7 +10,7 @@ module.exports = function(){
 	let bodyParser = require('body-parser');
 	let expressServer = express();
 
-	expressServer.use(express.static('./client/Project List Manager'));
+	expressServer.use(express.static('./client/Products List Manager'));
 	//expressServer.use(express.static('./lib'));
 	expressServer.use(express.static('public'));
 	expressServer.use(bodyParser.json()); // for parsing application/json
