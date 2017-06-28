@@ -38,7 +38,7 @@ server.connectDb()
                 logger.error(exc);
             })
             .then((restServer)=>{
-                logger.info(`Ebay Rest Server started and listening on port ${restServer.address().port}! `);
+                logger.info(`Project List Manager - Rest Server started and listening on port ${restServer.address().port}! `);
             })
     });
 
