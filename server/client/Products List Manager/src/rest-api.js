@@ -21,6 +21,7 @@ export class RestApi {
       url:"products",
       method:"POST",
       success:(response)=>{
+        console.log(response);
         this.manageError(response);
         this.ea.publish("ProductsReceived", response);
       },

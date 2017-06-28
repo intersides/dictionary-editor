@@ -8,6 +8,11 @@ section {
 a:focus {
   outline: none; }
 
+.navbar-default {
+  background-color: #2d3858 !important; }
+  .navbar-default .navbar-brand {
+    color: #d0d0d0 !important; }
+
 .navbar-nav li.loader {
   margin: 12px 24px 0 6px; }
 
@@ -63,7 +68,28 @@ li.list-group-item.active > a {
   font-size: 16px;
   font-weight: bold; }
 .productEntry .color {
-  font-weight: bold; }
+  font-size: 17px;
+  font-weight: 800; }
+  .productEntry .color > * {
+    display: inline-block; }
+.productEntry .inline-actions .actions button {
+  background: none;
+  border: none;
+  color: cornflowerblue;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: underline; }
+  .productEntry .inline-actions .actions button i {
+    display: inline-block;
+    margin: 4px;
+    font-size: 15px;
+    color: darkorange; }
+.productEntry .color-alias {
+  font-size: 17px;
+  font-weight: 800; }
+  .productEntry .color-alias .original-color {
+    font-size: 14px;
+    font-weight: 200; }
 .productEntry .price {
   font-size: small; }
 

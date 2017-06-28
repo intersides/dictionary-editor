@@ -51,7 +51,6 @@ export class ColorTransformationList{
 
   }
 
-
   keypressInput(){
     let formDomainVal = this.$selectedDomain.val().trim();
     let formRangeVal = this.$intendedRangeValue.val().trim();
@@ -69,15 +68,13 @@ export class ColorTransformationList{
   }
 
   flashItems(items, _state){
-    console.info("must display the items in result", items);
-    items.forEach((item)=>{
-      //identify the item
-      console.warn(item);
 
+    items.forEach((item)=>{
+
+      //identify the item
       for(let colorAliasEntry of this.aliases){
         //console.log(colorAliasEntry, item);
-        if(colorAliasEntry.domain === item.domain && colorAliasEntry.range === item.range){
-          console.error("must flash", colorAliasEntry);
+        if(colorAliasEntry.domain.toLowerCase() === item.domain.toLowerCase() && colorAliasEntry.range.toLowerCase() === item.range.toLowerCase() ){
           colorAliasEntry.blinkFor(_state);
         }
       }
@@ -90,8 +87,7 @@ export class ColorTransformationList{
     items.forEach((item)=>{
       //identify the item
       for(let colorAliasEntry of this.aliases){
-        //console.log(colorAliasEntry, item);
-        if(colorAliasEntry.domain === item.domain){
+        if(colorAliasEntry.domain.toLowerCase() === item.domain.toLowerCase()){
           colorAliasEntry.blinkFor(_state);
         }
       }
@@ -102,13 +98,10 @@ export class ColorTransformationList{
 
   flashItemsBasedOnRange(items, _state){
 
-    console.error(items);
-
     items.forEach((item)=>{
       //identify the item
       for(let colorAliasEntry of this.aliases){
-        //console.log(colorAliasEntry, item);
-        if(colorAliasEntry.domain === item.range){
+        if(colorAliasEntry.domain.toLowerCase() === item.range.toLowerCase()){
           colorAliasEntry.blinkFor(_state);
         }
       }
@@ -118,20 +111,17 @@ export class ColorTransformationList{
 
   flashItemsBasedOnReversRange(items, _state){
 
-    console.error(items);
-
     items.forEach((item)=>{
       //identify the item
       for(let colorAliasEntry of this.aliases){
-        //console.log(colorAliasEntry, item);
-        if(colorAliasEntry.range === item.domain){
+
+        if(colorAliasEntry.range.toLowerCase() === item.domain.toLowerCase()){
           colorAliasEntry.blinkFor(_state);
         }
       }
 
     });
   }
-
 
   setEventsDelegation(){
 
@@ -227,16 +217,11 @@ export class ColorTransformationList{
       }break;
     }
 
-    console.error(_dictionaryError);
 
     if(_dictionaryError['data'].length > 0){
       this.flashItems(_dictionaryError['data'], "error");
     }
     this.displayMessage(_dictionaryError['message']);
-  }
-
-  setDomain(){
-    console.log("setDomain:", this.selectedDomain);
   }
 
   fillAliasesList(colorList){
@@ -246,6 +231,7 @@ export class ColorTransformationList{
       let colorAliasEntry = new ColorAliasEntry(color, colorList[color]);
       this.aliases.push(colorAliasEntry);
     });
+    this.ea.publish("onAliasesListRebuilt", this.aliases);
   }
 
   cleanUpForm(){
@@ -300,4 +286,3 @@ export class ColorTransformationList{
   }
 
 }
-

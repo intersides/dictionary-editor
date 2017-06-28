@@ -16,9 +16,6 @@ export class ColorAliasEntry{
   }
 
   blinkFor(state, seconds=1){
-
-    console.warn("assigning state to feedback", state);
-
     this.feedbackState = state;
 
     setTimeout(()=>{
@@ -36,7 +33,6 @@ export class ColorAliasEntry{
 
   editMode(evt, value){
     this.isChecked = !this.isChecked;
-    console.log("in edit mode:", this.isChecked)
   }
 
   setValid(_flag){

@@ -30,7 +30,6 @@ class ClientError extends Error{
 	    this.type = params.type;
 	    this.message = params.message;
 	    this.details = params.details;
-
     }
 
 }

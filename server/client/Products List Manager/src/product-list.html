@@ -7,16 +7,26 @@
       <li class="list-group-item" repeat.for="product of products">
 
         <div class="productEntry">
-          <div class="actions">
-            <button click.delegate="editColor(product.color)"> set color alias</button>
-          </div>
 
           <div class="identifier">
             <span class="brand">${product.brand}</span>
             <span class="name">${product.name} ${product.version}</span>
           </div>
 
-          <div class="color">${product.color}</div>
+          <div if.bind="product.colorAlias !== null" class="color-alias">${product.colorAlias} <span if.bind="product.colorAlias !== product.color" title="original color name" class="original-color">( ${product.color} )</span></div>
+
+          <div if.bind="product.colorAlias === null"  class="color">
+
+            <span>${product.color}</span>
+
+            <div class="inline-actions" if.bind="product.colorAlias === null">
+              <div class="actions">
+                <button click.delegate="editColor(product.color)"><i class="fa fa-exclamation-triangle"></i> set color alias</button>
+              </div>
+            </div>
+
+          </div>
+
           <div class="price">${product.price}</div>
           <details>
             <summary>Description</summary>

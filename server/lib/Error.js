@@ -32,7 +32,6 @@ class Error{
 			});
 		}
 
-
 		this.type = params.type;
 		this.code = params.code;
 		this.message = params.message;

@@ -15,9 +15,7 @@ export class ProductList{
 
     this.products = [];
     this.selectedId = null;
-
     this.ea = EventAggregator;
-
     this.setEventsDelegation();
 
   }
@@ -31,17 +29,45 @@ export class ProductList{
       console.log("onColorAliasesReceived... doing nothing with it at the moment", data);
     });
 
+    this.ea.subscribe("onAliasesListRebuilt", (aliasList)=>{
+      //should compare the products color with the ranges from the list
+
+      let products = {};
+
+      for(let product of this.products){
+        let productColor = product.color;
+        //add new property colorAlias
+        product['colorAlias'] = null;
+        product['hasAlias'] = false;
+
+        for(let  colorAliasEntry of aliasList ){
+
+          let aliasDomain = colorAliasEntry.domain;
+          let aliasRange = colorAliasEntry.range;
+
+          if(
+            productColor.trim().toLowerCase() === aliasDomain.trim().toLowerCase()
+            ||
+            productColor.trim().toLowerCase() === aliasRange.trim().toLowerCase()
+          ){
+            product['colorAlias'] = aliasRange;
+            product['hasAlias'] = true;
+          }
+
+        }
+
+      }
+
+    });
+
+
   }
 
   _listToProducts(data){
-    console.log("***");
-    console.log(data);
 
     if(typeof data['products'] === "object" && data['products'] !== null){
 
       if(typeof data['products']['sPhones'] === "object" && data['products']['sPhones'].constructor === Array){
-
-        console.log("received phones", data['products']['sPhones']);
 
         data['products']['sPhones'].forEach((phone)=>{
           this.products.push(phone);
@@ -59,9 +85,7 @@ export class ProductList{
   created(){}
 
   editColor(_color){
-    console.log("****", _color);
     this.ea.publish("onSetColorPressed", _color);
-
   }
 
   select(product) {

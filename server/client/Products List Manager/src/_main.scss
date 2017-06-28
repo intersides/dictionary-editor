@@ -11,6 +11,13 @@ a:focus {
   outline: none;
 }
 
+.navbar-default{
+  background-color: #2d3858!important;
+  .navbar-brand{
+    color:#d0d0d0!important;
+  }
+}
+
 .navbar-nav li.loader {
   margin: 12px 24px 0 6px;
 }

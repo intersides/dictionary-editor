@@ -140,16 +140,18 @@ class ProductListServer extends Server{
 	addRoutes(){
 
 		this.rest.post('/products', (req, res)=>{
+			logger.log("/products");
 			res.status(200).json({products:this.getProducts()});
 		});
 
 		this.rest.get('/colorAliases', (req, res)=>{
+			logger.log("/colorAliases");
 			res.status(200).json({colorAliases:this.getColorAliases()});
 		});
 
 		this.rest.post('/addDomainRange', (req, res)=>{
 			let entry = req.body;
-			logger.log("entry", entry);
+			logger.log("/addDomainRange", entry);
 			let entryResult = this.client.addEntryToDictionary(entry.value, entry['list']);
 
 			let currentEntries = null;
@@ -176,7 +178,7 @@ class ProductListServer extends Server{
 
 		this.rest.post('/removeDomainRange', (req, res)=>{
 			let entry = req.body;
-			logger.log("entry", entry);
+			logger.log("/removeDomainRange", entry);
 
 
 			let currentEntries = null;
@@ -209,7 +211,7 @@ class ProductListServer extends Server{
 
 		this.rest.post('/editDomainRange', (req, res)=>{
 			let requestData = req.body;
-			logger.log("entry", requestData);
+			logger.log("/editDomainRange", requestData);
 
 			let propertyType = requestData['type'];
 

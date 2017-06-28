@@ -20,9 +20,44 @@
     font-size:16px;
     font-weight: bold;
   }
+
   .color{
-    font-weight: bold;
+    font-size: 17px;
+    font-weight: 800;
+    >*{
+      display: inline-block;
+    }
   }
+
+  .inline-actions{
+    .actions{
+      button{
+        background: none;
+        border:none;
+        color: cornflowerblue;
+        font-weight: 400;
+        font-size: 15px;
+        text-decoration: underline;
+        i{
+          display: inline-block;
+          margin: 4px;
+          font-size: 15px;
+          color: darkorange;
+        }
+      }
+    }
+
+  }
+
+  .color-alias{
+    font-size: 17px;
+    font-weight: 800;
+    .original-color{
+      font-size: 14px;
+      font-weight: 200;
+    }
+  }
+
   .price{
     font-size: small;
   }
