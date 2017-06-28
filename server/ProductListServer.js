@@ -138,19 +138,8 @@ class ProductListServer extends Server{
 
 
 	addRoutes(){
-		let self = this;
 
-		this.rest.post('/product/:productId', (req, res)=>{
-			res.status(200).json({msg:"OK"});
-		});
-
-        this.rest.get('/product/:productId', (req, res)=>{
-            let requestedProduct = req.params['productId'];
-            logger.log(requestedProduct);
-            res.status(200).json({requestedProduct:requestedProduct});
-        });
-
-		this.rest.get('/products', (req, res)=>{
+		this.rest.post('/products', (req, res)=>{
 			res.status(200).json({products:this.getProducts()});
 		});
 
@@ -158,24 +147,15 @@ class ProductListServer extends Server{
 			res.status(200).json({colorAliases:this.getColorAliases()});
 		});
 
-		this.rest.post('/colorAlias', (req, res)=>{
-
-			logger.log(req.body);
-
-			res.status(200).json({colorAliases:this.getColorAliases()});
-		});
-
 		this.rest.post('/addDomainRange', (req, res)=>{
 			let entry = req.body;
 			logger.log("entry", entry);
-
-
 			let entryResult = this.client.addEntryToDictionary(entry.value, entry['list']);
 
-			let currentEntries = this.client.getDictionary(entry['list']).getEntries();
-
+			let currentEntries = null;
 			if( (entryResult instanceof ClientError) === false){
 				logger.info(entryResult);
+				currentEntries = this.client.getDictionary(entry['list']).getEntries();
 				//save
 				fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
 					if(err){
@@ -190,9 +170,7 @@ class ProductListServer extends Server{
 			else{
 				logger.error(entryResult);
 			}
-
 			res.status(200).json({colorAliases:currentEntries, result:entryResult});
-
 
 		});
 
@@ -201,12 +179,12 @@ class ProductListServer extends Server{
 			logger.log("entry", entry);
 
 
+			let currentEntries = null;
 			let deleteResult = this.client.removeEntryFromDictionary(entry.value, entry['list']);
-
-			let currentEntries = this.client.getDictionary(entry['list']).getEntries();
 
 			if( (deleteResult instanceof ClientError) === false){
 				logger.info(deleteResult);
+				currentEntries = this.client.getDictionary(entry['list']).getEntries();
 				if(deleteResult === true){
 					//save
 					fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
@@ -224,7 +202,6 @@ class ProductListServer extends Server{
 			else{
 				logger.error(deleteResult);
 			}
-
 			res.status(200).json({colorAliases:currentEntries, result:deleteResult});
 
 
@@ -247,16 +224,16 @@ class ProductListServer extends Server{
 				console.error("unexpected type... ", propertyType);
 			}
 
-			let currentEntries = this.client.getDictionary(requestData['list']).getEntries();
+			let currentEntries = null;
 
 			//TODO:ensure that we only receive ClientError or object. Not a DictionaryError
 			if( (updateResult instanceof ClientError ) === false ){
 				logger.info(updateResult);
+				currentEntries = this.client.getDictionary(requestData['list']).getEntries();
 				//save
 				fs.writeFile(this.storedDataLocation, JSON.stringify(currentEntries, null, '\t'), {encoding:'utf8'}, (err)=>{
 					if(err){
 						logger.error("Could not save data ", err);
-
 					}
 					else{
 						logger.log("data stored!");
@@ -267,9 +244,7 @@ class ProductListServer extends Server{
 			else{
 				logger.error(updateResult);
 			}
-
 			res.status(200).json({colorAliases:currentEntries, result:updateResult});
-
 
 		});
 

@@ -453,10 +453,80 @@ describe("Client class", ()=>{
         });
 
 
-
     });
 
+    describe("extract dictionary error", ()=>{
 
+    	let isDictionaryError = function(error){
+		    if(typeof error.type !== "undefined"){
+
+			    if(error.type === "DICTIONARY_ERROR"){
+				    return true;
+			    }
+		    }
+		    return false;
+	    };
+
+	    let recursiveFindDictionaryError = function(error){
+
+		    if(typeof error.type !== "undefined"){
+
+			    if(error.type === "DICTIONARY_ERROR"){
+				    return error;
+			    }
+			    else if(error.type === "CLIENT_ERROR"){
+				    for(let _error of error["stackErrors"]){
+					    let insideError = recursiveFindDictionaryError(_error);
+					    if(isDictionaryError(insideError)){
+					    	return insideError;
+					    }
+				    }
+			    }
+		    }
+		    return null;
+	    };
+
+	    it('find dictionary error ', () => {
+
+		    let clientError = {
+			    "type": "CLIENT_ERROR",
+			    "code": "UNDEFINED",
+			    "message": "Could not add entry to dictionary",
+			    "details": "A detailed error has been appended.",
+			    "stackErrors": [
+				    {
+					    "type": "DICTIONARY_ERROR",
+					    "code": "DUPLICATE_FAIL",
+					    "message": "Failed adding entry to dictionary. The key already exists.",
+					    "details": "Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation.",
+					    "stackErrors": []
+				    }
+			    ]
+		    };
+
+		    let dicError = {
+			    "type": "DICTIONARY_ERROR",
+			    "code": "DUPLICATE_FAIL",
+			    "message": "Failed adding entry to dictionary. The key already exists.",
+			    "details": "Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation.",
+			    "stackErrors": []
+		    };
+
+		    let garbishData = "some garbish";
+
+		    let result = recursiveFindDictionaryError(clientError);
+		    expect(result).to.have.property("type", "DICTIONARY_ERROR");
+
+		    result = recursiveFindDictionaryError(dicError);
+		    expect(result).to.have.property("type", "DICTIONARY_ERROR");
+
+		    result = recursiveFindDictionaryError(garbishData);
+		    expect(result).to.be.null;
+
+
+	    });
+
+    });
 
 
 });

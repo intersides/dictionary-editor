@@ -71,6 +71,7 @@ class Dictionary{
 			if(willCycle === true){
 				return new DictionaryError({
 					code:ErrorCode.CYCLE_FAIL,
+					data:[domainRangeEntry],
 					message:"Failed adding entry to dictionary. It is a cycle.",
 					details:"Cycles: Two or more rows in a dictionary result in cycles, resulting in a never-ending transformation."
 				});
@@ -78,6 +79,7 @@ class Dictionary{
 			else if(willChain === true){
 				return new DictionaryError({
 					code:ErrorCode.CHAIN_FAIL,
+					data:[domainRangeEntry],
 					message:"Failed adding entry to dictionary. It is a chain.",
 					details:"Chains: A chain structure in the dictionary (a value in Range column also appears in Domain column of another entry), resulting in inconsistent transformation."
 				});
@@ -92,7 +94,8 @@ class Dictionary{
 			return new DictionaryError({
 				message:"Failed adding entry to dictionary. The key already exists.",
 				detail:'Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation',
-				code:ErrorCode.DUPLICATE_FAIL
+				code:ErrorCode.DUPLICATE_FAIL,
+				data:[domainRangeEntry]
 			});
 		}
 
@@ -251,7 +254,9 @@ class Dictionary{
 	    	//there are domains with this intended value. exit operaiton
             return new DictionaryError({
 	            message:"Cannot update range. The value already exists as domain.",
-	            code:ErrorCode.CHAIN_FAIL
+	            code:ErrorCode.CHAIN_FAIL,
+	            data:[{domain:in_originalVale, range:in_newValue}]
+
             });
 	    }
 	    else{
@@ -308,7 +313,8 @@ class Dictionary{
 					return new DictionaryError({
 						message:"Failed adding entry to dictionary. The key already exists.",
 						details:"Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous transformation.",
-						code:ErrorCode.DUPLICATE_FAIL
+						code:ErrorCode.DUPLICATE_FAIL,
+						data:[{domain:in_domainValue, range:in_rangeValue}]
 					});
 
 				}

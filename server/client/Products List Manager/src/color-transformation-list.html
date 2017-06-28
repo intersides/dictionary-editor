@@ -2,18 +2,20 @@
 
   <div class="color-transformation-list">
     <h3>Color Aliases</h3>
-    <div class="applicaiton-messages">this will replace error warning</div>
+    <div class="application-messages">
+      <span>${validationMessage}</span>
+    </div>
 
-    <form submit.trigger="addAlias()">
-      <input type="text" value.bind="selectedDomain">
-      <input type="text" value.bind="intendedRangeValue">
-      <button type="submit">Add alias</button>
+    <form  submit.trigger="addAlias()">
+      <input id="selectedDomain" type="text" value.bind="selectedDomain">
+      <input id="intendedRangeValue" type="text" value.bind="intendedRangeValue">
+      <button id="formReset"  type="reset"><i class="fa fa-refresh"></i></button>
+      <button id="addBtn" type="submit"><i class="fa fa-level-down"></i> <span>new set</span></button>
     </form>
-
 
     <ul class="list-group">
 
-      <li class="list-group-item ${alias.valid === true ? 'valid' : 'invalid'} ${alias.isChecked === true ? 'editable' : ''}" repeat.for="alias of aliases">
+      <li class="list-group-item ${alias.valid === true ? 'valid' : 'invalid'} ${alias.isChecked === true ? 'editable' : ''} ${alias.feedbackState}" repeat.for="alias of aliases">
 
         <input class="domain" type="text" data-beforechange="${alias.getDomain()}" value.bind="alias.domain" readonly.bind="!alias.isChecked" change.delegate="hasChanged(alias, 'domain', $event)">
         <input class="range" type="text" data-beforechange="${alias.getRange()}" value.bind="alias.range" readonly.bind="!alias.isChecked" change.delegate="hasChanged(alias, 'range', $event)">
@@ -24,7 +26,6 @@
       </li>
 
     </ul>
-    <!--<button click.delegate="validate()">validate</button>-->
   </div>
 
 </template>

@@ -28,7 +28,7 @@ export class ProductList{
     });
 
     this.ea.subscribe("onColorAliasesReceived", (data)=>{
-      console.log("onColorAliasesReceived", data);
+      console.log("onColorAliasesReceived... doing nothing with it at the moment", data);
     });
 
   }

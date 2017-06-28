@@ -19,7 +19,8 @@ class Error{
 			type : ErrorType.GENERIC_ERROR,
 			code:ErrorCode.UNDEFINED,
 			message : null,
-			details : null
+			details : null,
+			data:[]
 		};
 
 		//assign default values to params from _params
@@ -36,6 +37,7 @@ class Error{
 		this.code = params.code;
 		this.message = params.message;
 		this.details = params.details;
+		this.data = params.data;
 		this.stackErrors = [];
 	}
 

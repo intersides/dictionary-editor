@@ -12,6 +12,19 @@ export class ColorAliasEntry{
 
     this.valid = true;
     this.isChecked = false;
+    this.feedbackState = '';
+  }
+
+  blinkFor(state, seconds=1){
+
+    console.warn("assigning state to feedback", state);
+
+    this.feedbackState = state;
+
+    setTimeout(()=>{
+      this.feedbackState = '';
+    }, seconds*1000);
+
   }
 
   getDomain(){

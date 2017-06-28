@@ -1,38 +1,21 @@
 color-transformation-list{
 
-  ul{
-    display: table;
-    width: 100%;
 
-    >*{
-      display: table-row !important;
-      width: 100%;
+  li.list-group-item{
 
-      &.invalid{
-        >*{
-          //opacity:0.5;
-          background-color: rgba(255, 0, 0, 0.36);
-        }
-      }
+    display: flex;
+    margin: 2px;
+    border-radius: 7px;
 
-
-      >*{
-        display: table-cell;
-        padding: 5px;
-        &.range{}
-      }
-
-    }
-
-  }
-
-  li{
+    background: white;
+    transition: background-color 0.5s ease; //set the background color to alwys transition when set
 
     &:hover{
       background-color: #e0eef7;
-      >input{
-        background-color: inherit;
-      }
+    }
+
+    >input{
+      background-color: inherit;
     }
 
     .edit-entry,
@@ -80,6 +63,8 @@ color-transformation-list{
       padding: 5px;
       line-height: 2.3em;
       border-radius: 3px;
+      font-size: 18px;
+      width: 180px;
 
       &.range{
         font-weight: 800;
@@ -109,5 +94,56 @@ color-transformation-list{
     }
   }
 
+  .application-messages{
+    color:#AD310B;
+    min-height: 2em;
+  }
+
 }
 
+form{
+  display: inline-block;
+  margin: 7px;
+  input{
+    border: 1px solid lightblue;
+    padding: 6px;
+    line-height: 2em;
+    border-radius: 3px;
+    font-size: 19px;
+    width: 167px;
+  }
+  button{
+    border: none;
+    border-radius: 4px;
+    background: none;
+    color: white;
+    font-size: 16px;
+    &#formReset{
+    background-color: dodgerblue;
+
+  }
+    &#addBtn{
+      background-color: #33ad1f;
+    }
+    &:disabled{
+      background-color: gray!important;
+      opacity: .4;
+    }
+    >i{
+      font-size: inherit;
+    }
+
+  }
+}
+
+.warn{
+  background-color: rgb(255, 192, 74) !important;
+};
+
+.error{
+  background-color: rgb(226, 103, 80) !important;
+};
+
+.feedback{
+  background-color: #9aacd8 !important;
+};
