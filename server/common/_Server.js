@@ -70,7 +70,7 @@ class Server{
 		let self = this;
 
 		this.rest.all('*', (req, res, next)=>{
-			logger.log('request received');
+			logger.log('request received', req.path);
 			next();
 		});
 
