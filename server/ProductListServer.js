@@ -108,7 +108,7 @@ class ProductListServer extends Server{
 	constructor(expressServer, mysqlDb){
 		super(expressServer, mysqlDb);
 
-		this.client = new Client('ABC');
+		this.client = new Client('FNAC');
 		this.client.addDictionary(new ColorDictionary("smartphones"));
 
 		this.storedDataLocation = global.ROOT+'/storage/FNAC_coloraliases_smartphones.json';
