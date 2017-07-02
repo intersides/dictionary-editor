@@ -10,7 +10,8 @@
     "packages": "server/web/jspm_packages"
   },
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "start": "node ./server/main.js"
   },
   "repository": {
     "type": "git",

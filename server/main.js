@@ -9,6 +9,8 @@
 let logger = require('./common/utilities')().logger;
 
 let gConfig = require('../config');
+global.ROOT = __dirname;
+
 
 let expressSettings = require('./common/express.settings')();
 let ProductListServer = require('./ProductListServer');

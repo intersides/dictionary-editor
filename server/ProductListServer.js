@@ -111,7 +111,7 @@ class ProductListServer extends Server{
 		this.client = new Client('ABC');
 		this.client.addDictionary(new ColorDictionary("smartphones"));
 
-		this.storedDataLocation = './storage/FNAC_coloraliases_smartphones.json';
+		this.storedDataLocation = global.ROOT+'/storage/FNAC_coloraliases_smartphones.json';
 
 		this.loadDataSotrage(this.storedDataLocation, (err, data)=>{
 			if(err){
