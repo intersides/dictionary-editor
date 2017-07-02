@@ -56,9 +56,8 @@ class Server{
 
 				});
 
-
-
 				resolve(this);
+
 			}).on('error', function(error){
 				reject(error);
 			});
